@@ -27,5 +27,5 @@
   <label for={INPUT.PASSWORD}>Password :</label>
   <input id={INPUT.PASSWORD} name={INPUT.PASSWORD} type="password" />
 
-  <button type="submit">Send</button>
+  <button type="submit">Send register</button>
 </form>
