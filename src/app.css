@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .gradiant-block {
+        background: linear-gradient(180deg, #46D0EB 0%, #6DFCA1 100%);
+    }
+}
+
+@layer base {
+    html {
+        font-family: ubuntu, Proxima Nova, system-ui, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+    }
+
+    :root {
+        --color-primary: #6DFCA1;
+        --color-secondary: #46D0EB;
+        --color-text-primary: #fffffe;
+        --color-text-secondary: #000000;
+    }
+}
+
+* {
+    font-family: Poppins-regular, ubuntu, sans-serif;
+    box-sizing: border-box;
+}
