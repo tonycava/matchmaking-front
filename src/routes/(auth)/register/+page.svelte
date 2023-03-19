@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { INPUT } from '$lib/utils.js';
 	import { applyAction, enhance } from '$app/forms';
-	import Loading from '@components/Loading.svelte';
-	import { page } from '$app/stores';
+	import Loading from '@components/common/Loading.svelte';
+	import IconAtSolid from '@components/svg/IconAtSolid.svelte';
+	import IconLockSolid from '@components/svg/IconLockSolid.svelte';
 
 	let isLoading = false;
-
-	$: console.log('form', $page.form);
 
 	const handleSubmit = () => {
 		isLoading = true;
@@ -21,11 +20,39 @@
   <Loading absolute />
 {/if}
 
-<form action="?/register" enctype="multipart/form-data" method="POST" use:enhance={handleSubmit}>
-  <label for={INPUT.USERNAME}>Username :</label>
-  <input id={INPUT.USERNAME} name={INPUT.USERNAME} type="text" />
-  <label for={INPUT.PASSWORD}>Password :</label>
-  <input id={INPUT.PASSWORD} name={INPUT.PASSWORD} type="password" />
+<div class="flex justify-center items-center h-screen flex-col gap-16 -mt-8">
+  <span
+    class="relative flex justify-center items-end text-2xl font-poppins-bolds text-center text-secondary
+    before:-bottom-3 before:absolute before:content-[''] before:w-32 before:h-1 before:bg-secondary">Register</span>
 
-  <button type="submit">Send register</button>
-</form>
+  <form action="?/register" class="text-secondary flex flex-col w-96 gap-4 pt-10 pb-6" enctype="multipart/form-data"
+        method="POST" use:enhance={handleSubmit}>
+    <fieldset class="bg-primary mx-auto flex p-1 rounded gap-4 justify-center [&>svg]:w-6 [&>svg]:h-6 [&>svg]:my-auto">
+      <IconAtSolid color="#ffeba7" />
+      <input class="bg-primary placeholder-gray-500 outline-0 h-10 p-1 w-8/12 rounded text-sm" id={INPUT.USERNAME}
+             name={INPUT.USERNAME} placeholder="Username"
+             type="text" />
+    </fieldset>
+
+    <fieldset class="bg-primary mx-auto flex p-1 rounded gap-4 justify-center [&>svg]:w-6 [&>svg]:h-6 [&>svg]:my-auto">
+      <IconLockSolid color="#ffeba7" />
+      <input class="bg-primary placeholder-gray-500 outline-0 h-10 p-1 w-8/12 rounded text-sm" id={INPUT.PASSWORD}
+             name={INPUT.PASSWORD} placeholder="Password"
+             type="password" />
+    </fieldset>
+    <div class="w-full flex justify-center">
+      <button class="bg-secondary p-2 rounded text-primary text-sm font-bold" type="submit">Register</button>
+    </div>
+  </form>
+</div>
+
+<span class="absolute text-sm bottom-0 p-3 text-secondary font-poppins-medium">Have an account ? <a
+  class="font-poppins-bold"
+  href="/login">Login !</a></span>
+
+<style>
+    form {
+        background-size: cover;
+        background-image: url("/3dcube.jpg");
+    }
+</style>

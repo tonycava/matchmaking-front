@@ -1,3 +1,5 @@
+@import "fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,14 +16,15 @@
     }
 
     body {
+        background-color: #1f2029;
         min-height: 100vh;
     }
 
     :root {
-        --color-primary: #6DFCA1;
-        --color-secondary: #46D0EB;
-        --color-text-primary: #fffffe;
-        --color-text-secondary: #000000;
+        --color-primary: #020305;
+        --color-secondary: #ffeba7;
+        --color-text-primary: #ffeba7;
+        --color-text-secondary: #020305;
     }
 }
 
