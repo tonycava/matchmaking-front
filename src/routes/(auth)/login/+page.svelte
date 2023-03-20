@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { INPUT } from '$lib/utils.js';
 	import { applyAction, enhance } from '$app/forms';
-	import Loading from '@components/Loading.svelte';
+	import Loading from '@components/common/Loading.svelte';
 	import { page } from '$app/stores';
 
 	let isLoading = false;

@@ -2,7 +2,7 @@
 	import { INPUT } from '$lib/utils.js';
 	import { applyAction, enhance } from '$app/forms';
 	import Loading from '@components/common/Loading.svelte';
-	import IconAtSolid from '@components/svg/IconAtSolid.svelte';
+	import IconUserSolid from '@components/svg/IconUserSolid.svelte';
 	import IconLockSolid from '@components/svg/IconLockSolid.svelte';
 
 	let isLoading = false;
@@ -25,10 +25,10 @@
     class="relative flex justify-center items-end text-2xl font-poppins-bolds text-center text-secondary
     before:-bottom-3 before:absolute before:content-[''] before:w-32 before:h-1 before:bg-secondary">Register</span>
 
-  <form action="?/register" class="text-secondary flex flex-col w-96 gap-4 pt-10 pb-6" enctype="multipart/form-data"
+  <form action="?/register" class="bg-cover bg-[url('/3dcube.jpg')] text-secondary flex flex-col w-96 gap-4 pt-10 pb-6" enctype="multipart/form-data"
         method="POST" use:enhance={handleSubmit}>
     <fieldset class="bg-primary mx-auto flex p-1 rounded gap-4 justify-center [&>svg]:w-6 [&>svg]:h-6 [&>svg]:my-auto">
-      <IconAtSolid color="#ffeba7" />
+      <IconUserSolid color="#ffeba7" />
       <input class="bg-primary placeholder-gray-500 outline-0 h-10 p-1 w-8/12 rounded text-sm" id={INPUT.USERNAME}
              name={INPUT.USERNAME} placeholder="Username"
              type="text" />
@@ -46,13 +46,9 @@
   </form>
 </div>
 
-<span class="absolute text-sm bottom-0 p-3 text-secondary font-poppins-medium">Have an account ? <a
+<span class="absolute text-sm bottom-0 p-3 text-secondary font-poppins-medium">Have an account ?
+  <a
   class="font-poppins-bold"
-  href="/login">Login !</a></span>
-
-<style>
-    form {
-        background-size: cover;
-        background-image: url("/3dcube.jpg");
-    }
-</style>
+  href="/login">Login !
+  </a>
+</span>
