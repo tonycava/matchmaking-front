@@ -5,6 +5,7 @@
 	import IconUserSolid from '@components/svg/IconUserSolid.svelte';
 	import IconLockSolid from '@components/svg/IconLockSolid.svelte';
 	import type { FormResponse } from '@models/User';
+	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 
 	export let form: FormResponse;
 
@@ -13,7 +14,6 @@
 	const handleSubmit = () => {
 		isLoading = true;
 		return async ({ result }) => {
-			console.log(result);
 			await applyAction(result);
 			isLoading = false;
 		};
@@ -49,7 +49,7 @@
       {#if form?.internalError}
         <span class="text-sm text-red-600 text-center font-poppins-bold">{form?.internalError}</span>
       {/if}
-      <button class="bg-secondary p-2 rounded p-3 w-fit mx-auto text-primary text-sm font-bold" type="submit">Register</button>
+      <PrimaryButton type="submit">Register</PrimaryButton>
     </div>
   </form>
 </div>

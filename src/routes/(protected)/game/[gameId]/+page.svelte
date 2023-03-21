@@ -7,8 +7,9 @@
 	import Choosing from './Choosing.svelte';
 	import Reveal from './Reveal.svelte';
 	import Finish from './Finish.svelte';
+	import PageData = App.PageData;
 
-	export let data: App.PageData;
+	export let data: PageData;
 	socket.emit('joinGame', $page.params.gameId);
 
 	let gameStatus: Game = {
@@ -38,18 +39,13 @@
 </script>
 
 
-<div class="">
-  <div>{JSON.stringify(gameStatus)}</div>
-
-  {#if gameStatus?.state === "choosing"}
-    <span>You play {gameStatus.actualPlay[data.user.id]}</span>
-    <Choosing user={data.user} />
-  {:else if gameStatus?.state === "reveal"}
-    <Reveal />
-  {:else if gameStatus?.state === "finished"}
-    <Finish />
-  {/if}
-</div>
+{#if gameStatus?.state === "choosing"}
+  <Choosing user={data.user} game={gameStatus} />
+{:else if gameStatus?.state === "reveal"}
+  <Reveal />
+{:else if gameStatus?.state === "finished"}
+  <Finish />
+{/if}
 
 
 

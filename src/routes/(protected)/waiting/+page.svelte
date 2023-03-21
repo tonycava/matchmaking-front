@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import type { GameInfo } from '@models/User';
 	import { game } from '@stores/game.store';
+	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 
 	export let data: App.PageData;
 
@@ -24,4 +25,7 @@
 
 </script>
 
-<h1>Hello world</h1>
+<div class="flex justify-center items-center h-screen flex-col gap-8">
+  <span class="text-secondary text-3xl font-poppins-medium">You are now waiting another player !</span>
+  <PrimaryButton on:click={() => goto("/")}>Go back on the home page</PrimaryButton>
+</div>
