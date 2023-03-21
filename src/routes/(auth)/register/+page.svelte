@@ -4,7 +4,7 @@
 	import Loading from '@components/common/Loading.svelte';
 	import IconUserSolid from '@components/svg/IconUserSolid.svelte';
 	import IconLockSolid from '@components/svg/IconLockSolid.svelte';
-	import type { FormResponse } from '@models/User';
+	import type { FormResponse } from '@models/Error';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 
 	export let form: FormResponse;

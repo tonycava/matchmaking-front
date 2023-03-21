@@ -1,22 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import socket from '$lib/webSocketClient';
-	import { game } from '@stores/game.store';
 	import { onMount } from 'svelte';
-	import type { Game, GameInfo } from '@models/User';
+	import type { Game } from '@models/Game';
 	import Choosing from './Choosing.svelte';
 	import Reveal from './Reveal.svelte';
 	import Finish from './Finish.svelte';
-	import PageData = App.PageData;
+	import Score from '@components/Score.svelte';
 
-	export let data: PageData;
-	socket.emit('joinGame', $page.params.gameId);
-
-	let gameStatus: Game = {
+	let game: Game = {
 		state: 'choosing',
-		whoWin: [null, null, null],
+		whoWin: ['3f31aad2-73f5-4f05-9d28-a67a930c35b3', null, 'f35f21e2-ce58-4b5c-ab7d-87338578f65d'],
 		round: 3,
-		actualPlay: { 'b2c159f9-5a6d-4af3-b14f-b143554d3180': 'scissors' },
+		actualPlay: { '3f31aad2-73f5-4f05-9d28-a67a930c35b3': 'scissors' },
 		timerPlay: 10,
 		timerRev: 5,
 		players: [
@@ -25,25 +21,33 @@
 		],
 	};
 
-
 	onMount(() => {
-		const gameInfo: GameInfo = JSON.parse(localStorage.getItem('game') || '{}');
-		game.set(gameInfo);
+		socket.emit('joinGame', $page.params.gameId);
 	});
 
-	$: console.log('game', $game);
-
 	socket.on('update', (data: Game) => {
-		gameStatus = data;
+		game = data;
 	});
 </script>
 
+<div class="flex justify-between">
+  <div class="text-3xl text-secondary m-4 relative">Round : <b>{game.round}</b></div>
+  <Score scores={game.whoWin} />
 
-{#if gameStatus?.state === "choosing"}
-  <Choosing user={data.user} game={gameStatus} />
-{:else if gameStatus?.state === "reveal"}
+  {#if game?.state === "choosing"}
+    <div class="text-3xl text-secondary m-4 relative">Time since next reveal : <b>{game.timerPlay}</b></div>
+  {:else if game?.state === "reveal"}
+    <div class="text-3xl text-secondary m-4 relative">Time since next round : <b>{game.timerRev}</b></div>
+  {:else if game?.state === "finished"}
+    <div class="text-3xl text-secondary m-4 relative">Your game is : <b>finished</b></div>
+  {/if}
+</div>
+
+{#if game?.state === "choosing"}
+  <Choosing game={game} />
+{:else if game?.state === "reveal"}
   <Reveal />
-{:else if gameStatus?.state === "finished"}
+{:else if game?.state === "finished"}
   <Finish />
 {/if}
 

@@ -2,27 +2,21 @@
 	import socket from '$lib/webSocketClient';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import type { GameInfo } from '@models/User';
-	import { game } from '@stores/game.store';
+	import type { GameInfo } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
-
-	export let data: App.PageData;
+	import { user } from '@stores/user.store';
 
 	onMount(() => {
-
 		window.addEventListener('beforeunload', () => {
-			socket.emit('leaveWaiting', { userId: data.user?.id });
+			socket.emit('leaveWaiting', { userId: $user?.id });
 		});
 	});
 
 	socket.on('partner', async (data: GameInfo) => {
-		localStorage.setItem('game', JSON.stringify(data));
-		game.set(data);
 		await goto(`/game/${data.gameId}`);
 	});
 
-	socket.emit('joinWaiting', { userId: data.user?.id, joinAt: new Date() });
-
+	socket.emit('joinWaiting', { userId: $user?.id, joinAt: new Date() });
 </script>
 
 <div class="flex justify-center items-center h-screen flex-col gap-8">
