@@ -6,6 +6,7 @@
 	import IconHandBackFistSolid from '@components/svg/IconHandBackFistSolid.svelte';
 	import IconHandSolid from '@components/svg/IconHandSolid.svelte';
 	import { user } from '@stores/user.store';
+	import MoveToShow from '@components/MoveToShow.svelte';
 
 	export let game: Game;
 
@@ -20,13 +21,7 @@
 </script>
 
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 z-10 [&>svg]:h-32 [&>svg]:w-32">
-  {#if game.actualPlay[$user?.id] === 'rock'}
-    <IconHandBackFistSolid color="#ffeba7" />
-  {:else if game.actualPlay[$user?.id] === 'paper'}
-    <IconHandSolid color="#ffeba7" />
-  {:else if game.actualPlay[$user?.id] === 'scissors'}
-    <IconScissorsSolid color="#ffeba7" />
-  {/if}
+  <MoveToShow move={game.actualPlay[$user?.id]} />
 </div>
 
 <div class="absolute bottom-40 flex gap-4 left-1/2 flex-col gap-8 -translate-x-1/2">
