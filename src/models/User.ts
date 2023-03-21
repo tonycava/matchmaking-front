@@ -4,6 +4,10 @@ export type User = {
 	createdAt: Date;
 }
 
+export type FormResponse = {
+	internalError: string;
+}
+
 export type GameInfo = {
 	gameId: string;
 

@@ -9,10 +9,10 @@ const register: Action = async ({ request, cookies }) => {
 	const password = form.get(INPUT.PASSWORD) as string;
 
 	const response = await AuthService.register(username, password)
-		.catch(e => ({ message: e.data?.message || 'Internal server error' }));
-
+		.catch(e => ({ message: e.response.data.message || 'Internal server error' }));
 	if ('message' in response) {
-		return fail(303, { internalError: response?.message || 'Internal server error' });
+		const errors = response.message.split(';');
+		return fail(303, { internalError: errors?.at(0) || 'Internal server error' });
 	}
 
 	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token, defaultCookiesOptions);
