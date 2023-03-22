@@ -5,6 +5,16 @@ export enum INPUT {
 	PASSWORD = 'password',
 }
 
+export enum WEB_SOCKET_EVENT {
+	CONNECT = 'connect',
+	LEAVE_WAITING = 'leaveWaiting',
+	JOIN_GAME = 'joinGame',
+	PLAY = 'play',
+	CHAT = 'chat',
+	NEW_MESSAGE = 'newMessage',
+	PARTNER = 'partner',
+}
+
 export enum COOKEYS {
 	JWT_TOKEN = 'jwt_token',
 }

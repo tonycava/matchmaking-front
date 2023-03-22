@@ -7,6 +7,7 @@
 	import Reveal from './Reveal.svelte';
 	import Finish from './Finish.svelte';
 	import Score from '@components/Score.svelte';
+	import { WEB_SOCKET_EVENT } from '$lib/utils';
 
 	let game: Game = {
 		state: 'reveal',
@@ -25,7 +26,7 @@
 	};
 
 	onMount(() => {
-		socket.emit('joinGame', $page.params.gameId);
+		socket.emit(WEB_SOCKET_EVENT.JOIN_GAME, $page.params.gameId);
 	});
 
 	socket.on('update', (data: Game) => {
@@ -33,15 +34,17 @@
 	});
 </script>
 
-<div class="flex justify-between">
-  <div class="text-3xl text-secondary m-4 relative">Round : <b>{game.round}</b></div>
+<div class="flex">
+  <div class="text-3xl text-secondary m-4 relative flex-1">Round : <b>{game.round}</b></div>
   <Score scores={game.whoWin} />
   {#if game?.state === "choosing"}
-    <div class="text-3xl text-secondary m-4 relative">Time since next reveal : <b>{game.timerPlay}</b></div>
+    <div class="text-3xl text-secondary m-4 relative flex-1 justify-end flex">Time since next reveal :
+      <b>{game.timerPlay}</b></div>
   {:else if game?.state === "reveal"}
-    <div class="text-3xl text-secondary m-4 relative">Time since next round : <b>{game.timerRev}</b></div>
+    <div class="text-3xl text-secondary m-4 relative flex-1 justify-end flex">Time since next round :
+      <b>{game.timerRev}</b></div>
   {:else if game?.state === "finished"}
-    <div class="text-3xl text-secondary m-4 relative">Your game is : <b>finished</b></div>
+    <div class="text-3xl text-secondary m-4 relative flex-1 justify-end flex">Your game is : <b>finished</b></div>
   {/if}
 </div>
 
@@ -50,5 +53,5 @@
 {:else if game?.state === "reveal"}
   <Reveal game={game} />
 {:else if game?.state === "finished"}
-  <Finish />
+  <Finish game={game} />
 {/if}
