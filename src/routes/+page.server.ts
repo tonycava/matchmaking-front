@@ -1,12 +1,14 @@
 import type { PageServerLoad } from './$types';
-import { COOKEYS } from '$lib/utils';
-import { getChat } from '@services/chat.service';
+import { COOKEYS, WEB_SOCKET_EVENT } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
+import ChatService from '@services/chat.service';
 
-export const load: PageServerLoad = async ({ cookies }) => {
+export const load: PageServerLoad = async ({ cookies, locals }) => {
+	if (!locals.user) throw redirect(303, '/login');
+
 	const token = cookies.get(COOKEYS.JWT_TOKEN) ?? '';
 
-	const response = await getChat(token)
+	const response = await ChatService.getChats(token, { start: 0, end: 11 })
 		.catch(() => undefined);
 
 	if (!response) {

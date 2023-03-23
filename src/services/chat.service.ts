@@ -1,5 +1,12 @@
 import axios from 'axios';
+import type { Range } from '@models/Chat';
+import { browser } from '$app/environment';
 
-export const getChat = async (token: string) => {
-	return await axios.get(`${import.meta.env.VITE_API_URL}/chat`, { headers: { Authorization: token } });
+const getChats = async (jwtToken: string, range: Range) => {
+	const ENDPOINT_URI = browser ? import.meta.env.VITE_EXTERNAL_API_URL : import.meta.env.VITE_API_URL;
+	return await axios.get(`${ENDPOINT_URI}/chat?start=${range.start}&end=${range.end}`, { headers: { Authorization: jwtToken } });
+};
+
+export default {
+	getChats
 };

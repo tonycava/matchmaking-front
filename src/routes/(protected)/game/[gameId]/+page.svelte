@@ -10,7 +10,7 @@
 	import { WEB_SOCKET_EVENT } from '$lib/utils';
 
 	let game: Game = {
-		state: 'reveal',
+		state: 'finished',
 		whoWin: ['3f31aad2-73f5-4f05-9d28-a67a930c35b3', null, 'f35f21e2-ce58-4b5c-ab7d-87338578f65d'],
 		round: 3,
 		actualPlay: {

@@ -14,7 +14,6 @@
 	const handleSubmit = () => {
 		isLoading = true;
 		return async ({ result }) => {
-			console.log(result);
 			await applyAction(result);
 			isLoading = false;
 		};
