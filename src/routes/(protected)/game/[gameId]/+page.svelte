@@ -29,7 +29,7 @@
 		socket.emit(WEB_SOCKET_EVENT.JOIN_GAME, $page.params.gameId);
 	});
 
-	socket.on('update', (data: Game) => {
+	socket.on(WEB_SOCKET_EVENT.UPDATE, (data: Game) => {
 		game = data;
 	});
 </script>

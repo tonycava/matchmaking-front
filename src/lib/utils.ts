@@ -10,6 +10,8 @@ export enum WEB_SOCKET_EVENT {
 	LEAVE_WAITING = 'leaveWaiting',
 	JOIN_GAME = 'joinGame',
 	PLAY = 'play',
+	UPDATE = 'update',
+	JOIN_WAITING = 'joinWaiting',
 	CHAT = 'chat',
 	NEW_MESSAGE = 'newMessage',
 	PARTNER = 'partner',

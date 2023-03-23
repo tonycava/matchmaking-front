@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { Move } from '@models/Game';
-	import type { Game } from '@models/Game';
+	import type { Game, Move } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import { user } from '@stores/user.store';
 	import MoveToShow from '@components/MoveToShow.svelte';
+	import { WEB_SOCKET_EVENT } from '$lib/utils';
 
 	export let game: Game;
 
 	const moves: [Move, Move, Move] = ['rock', 'paper', 'scissors'];
 	const onPlay = (move: Move) => {
-		console.log('play', move);
+		console.log(WEB_SOCKET_EVENT.PLAY, move);
 		game.actualPlay[$user?.id] = move;
 		// socket.emit('play', { gameId: $page.params.gameId, userId: user.id, move });
 	};
