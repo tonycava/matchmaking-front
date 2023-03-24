@@ -8,7 +8,8 @@
 	import { user } from '@stores/user.store';
 
 	onMount(() => {
-		const token = Cookies.get(COOKEYS.JWT_TOKEN) ?? '';
+		const token = Cookies.get(COOKEYS.JWT_TOKEN);
+		if (!token) return;
 		const userObj = jwtDecode<User | null>(token);
 		user.set(userObj);
 	});
