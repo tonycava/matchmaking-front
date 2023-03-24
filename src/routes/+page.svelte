@@ -3,7 +3,7 @@
 	import { user } from '@stores/user.store';
 	import { page } from '$app/stores';
 	import Cookies from 'js-cookie';
-	import { COOKEYS, WEB_SOCKET_EVENT } from '$lib/utils';
+	import { COOKEYS, disconnect, WEB_SOCKET_EVENT, INPUT } from '$lib/utils';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import type { Chat, Range } from '@models/Chat';
 	import { goto } from '$app/navigation';
@@ -13,24 +13,13 @@
 	import InputFieldset from '@components/form/InputFieldset.svelte';
 	import type { Leaderboard } from '@models/Leaderboard';
 	import { applyAction, enhance } from '$app/forms';
-	import { INPUT } from '$lib/utils.js';
 
 	let message = '';
 	let chats: Chat[] = [];
 	let haveMoreChat = true;
 
 	const RATIO = 11;
-
-	let range: Range = {
-		start: 0,
-		end: RATIO,
-	};
-
-	const disconnect = () => {
-		user.set(null);
-		Cookies.remove(COOKEYS.JWT_TOKEN);
-		goto('/login');
-	};
+	let range: Range = { start: 0, end: RATIO };
 
 	const handleSendMessage = async () => {
 		return async ({ result }) => {
@@ -56,17 +45,10 @@
 	};
 
 	const getWinRate = (leaderboardUser: Leaderboard) => {
-		if (leaderboardUser.numberOfWins === 0 && leaderboardUser.numberOfLosses === 0) {
-			return 'No game !';
-		}
+		if (leaderboardUser.numberOfWins === 0 && leaderboardUser.numberOfLosses === 0) return 'No game !';
 
-		if (leaderboardUser.numberOfWins === 0) {
-			return '0%';
-		}
-
-		if (leaderboardUser.numberOfLosses === 0) {
-			return '100%';
-		}
+		if (leaderboardUser.numberOfWins === 0) return '0%';
+		if (leaderboardUser.numberOfLosses === 0) return '100%';
 
 		return `${(leaderboardUser.numberOfWins / leaderboardUser.numberOfLosses * 100).toFixed(0)}%`;
 	};
@@ -97,10 +79,8 @@
   {#each $page.data.leaderboard as leaderboardUser, i}
     <div
       class="font-poppins-medium relative mx-auto text-sm w-[90%] p-3 mt-4 bg-secondary p-2 rounded">
-      <b
-        class="font-bold">{leaderboardUser.username} </b> | Win : {leaderboardUser.numberOfWins} | Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRate(leaderboardUser)}
+      <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} | Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRate(leaderboardUser)}
       <span class="absolute right-2">#{i + 1}</span>
     </div>
-
   {/each}
 </Frame>
