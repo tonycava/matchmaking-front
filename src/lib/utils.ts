@@ -4,6 +4,8 @@ import { browser } from '$app/environment';
 export enum INPUT {
 	USERNAME = 'username',
 	PASSWORD = 'password',
+
+	MESSAGE = 'message'
 }
 
 export const getBaseURL = () => browser ? import.meta.env.VITE_EXTERNAL_API_URL : import.meta.env.VITE_API_URL;
@@ -29,5 +31,5 @@ export const defaultCookiesOptions: CookieSerializeOptions = {
 	httpOnly: false,
 	sameSite: 'strict',
 	secure: process.env.NODE_ENV === 'production',
-	maxAge: 60 * 60 * 24 * 3
+	maxAge: 60 * 60 * 24 * 3,
 };

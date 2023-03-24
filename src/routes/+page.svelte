@@ -12,6 +12,8 @@
 	import Frame from '@components/layout/Frame.svelte';
 	import InputFieldset from '@components/form/InputFieldset.svelte';
 	import type { Leaderboard } from '@models/Leaderboard';
+	import { applyAction, enhance } from '$app/forms';
+	import { INPUT } from '$lib/utils.js';
 
 	let message = '';
 	let chats: Chat[] = [];
@@ -31,8 +33,10 @@
 	};
 
 	const handleSendMessage = async () => {
-		socket.emit(WEB_SOCKET_EVENT.CHAT, { userId: $user?.id, message });
-		message = '';
+		return async ({ result }) => {
+			await applyAction(result);
+			message = '';
+		};
 	};
 
 	socket.on(WEB_SOCKET_EVENT.NEW_MESSAGE, (chat: Chat) => chats = [chat, ...chats]);
@@ -51,8 +55,6 @@
 		}
 	};
 
-	$: chats = $page.data.chats;
-
 	const getWinRate = (leaderboardUser: Leaderboard) => {
 		if (leaderboardUser.numberOfWins === 0 && leaderboardUser.numberOfLosses === 0) {
 			return 'No game !';
@@ -68,6 +70,8 @@
 
 		return `${(leaderboardUser.numberOfWins / leaderboardUser.numberOfLosses * 100).toFixed(0)}%`;
 	};
+
+	$: chats = $page.data.chats;
 </script>
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 text-2xl">
@@ -83,9 +87,8 @@
   {#each chats as chat, i}
     <ChatCard isLast={i === chats.length -1} chat={chat} getMore={getMore} />
   {/each}
-
-  <form class="flex absolute bottom-0 gap-2 m-1" on:submit|preventDefault={handleSendMessage}>
-    <InputFieldset size={8} bind:value={message} src="/icons/IconMessageSolid.svg" />
+  <form method="POST" use:enhance={handleSendMessage} class="flex absolute bottom-0 gap-2 m-1">
+    <InputFieldset name={INPUT.MESSAGE} size={8} bind:value={message} src="/icons/IconMessageSolid.svg" />
     <PrimaryButton type="submit">Send message</PrimaryButton>
   </form>
 </Frame>
