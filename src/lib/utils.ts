@@ -1,9 +1,12 @@
 import type { CookieSerializeOptions } from 'cookie';
+import { browser } from '$app/environment';
 
 export enum INPUT {
 	USERNAME = 'username',
 	PASSWORD = 'password',
 }
+
+export const getBaseURL = () => browser ? import.meta.env.VITE_EXTERNAL_API_URL : import.meta.env.VITE_API_URL;
 
 export enum WEB_SOCKET_EVENT {
 	CONNECT = 'connect',
