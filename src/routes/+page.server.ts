@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { COOKEYS, WEB_SOCKET_EVENT } from '$lib/utils';
+import { COOKEYS } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 import ChatService from '@services/chat.service';
 
