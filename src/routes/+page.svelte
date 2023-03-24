@@ -7,9 +7,11 @@
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import type { Chat, Range } from '@models/Chat';
 	import { goto } from '$app/navigation';
-	import IconMessageSolid from '@components/svg/IconMessageSolid.svelte';
 	import ChatCard from '@components/ChatCard.svelte';
 	import ChatService from '@services/chat.service';
+	import Frame from '@components/layout/Frame.svelte';
+	import InputFieldset from '@components/form/InputFieldset.svelte';
+	import type { Leaderboard } from '@models/Leaderboard';
 
 	let message = '';
 	let chats: Chat[] = [];
@@ -50,6 +52,22 @@
 	};
 
 	$: chats = $page.data.chats;
+
+	const getWinRate = (leaderboardUser: Leaderboard) => {
+		if (leaderboardUser.numberOfWins === 0 && leaderboardUser.numberOfLosses === 0) {
+			return 'No game !';
+		}
+
+		if (leaderboardUser.numberOfWins === 0) {
+			return '0%';
+		}
+
+		if (leaderboardUser.numberOfLosses === 0) {
+			return '100%';
+		}
+
+		return `${(leaderboardUser.numberOfWins / leaderboardUser.numberOfLosses * 100).toFixed(0)}%`;
+	};
 </script>
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 text-2xl">
@@ -61,21 +79,25 @@
   <PrimaryButton on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
 </div>
 
-<div class='fixed w-96 h-96 bottom-0 right-0 border border-secondary'>
-  <ul class='ti-anchor h-3/4 w-full overflow-y-auto flex flex-col-reverse'>
-    {#each chats as chat, i}
-      <ChatCard isLast={i === chats.length -1} chat={chat} getMore={getMore} />
-    {/each}
-  </ul>
+<Frame bottom={true} right={true} isReversed={true}>
+  {#each chats as chat, i}
+    <ChatCard isLast={i === chats.length -1} chat={chat} getMore={getMore} />
+  {/each}
 
   <form class="flex absolute bottom-0 gap-2 m-1" on:submit|preventDefault={handleSendMessage}>
-    <fieldset class="bg-primary mx-auto flex p-2 rounded gap-4 justify-center [&>svg]:w-6 [&>svg]:h-6 [&>svg]:my-auto">
-      <IconMessageSolid color="#ffeba7" />
-      <input class="bg-primary text-secondary placeholder-gray-500 outline-0 h-10 p-1 w-48 rounded text-sm"
-             placeholder="Message"
-             bind:value={message}
-             type="text" />
-    </fieldset>
+    <InputFieldset size={8} bind:value={message} src="/icons/IconMessageSolid.svg" />
     <PrimaryButton type="submit">Send message</PrimaryButton>
   </form>
-</div>
+</Frame>
+
+<Frame bottom={true} left={true}>
+  {#each $page.data.leaderboard as leaderboardUser, i}
+    <div
+      class="font-poppins-medium relative mx-auto text-sm w-[90%] p-3 mt-4 bg-secondary p-2 rounded">
+      <b
+        class="font-bold">{leaderboardUser.username} </b> | Win : {leaderboardUser.numberOfWins} | Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRate(leaderboardUser)}
+      <span class="absolute right-2">#{i + 1}</span>
+    </div>
+
+  {/each}
+</Frame>

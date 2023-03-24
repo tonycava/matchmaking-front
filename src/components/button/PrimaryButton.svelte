@@ -1,7 +1,6 @@
 <script lang="ts">
 	export let type: 'submit' | 'button' = 'button';
 	export let css = '';
-
 	export let disabled = false;
 </script>
 
