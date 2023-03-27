@@ -70,7 +70,7 @@
     <ChatCard isLast={i === chats.length -1} chat={chat} getMore={getMore} />
   {/each}
   <form method="POST" use:enhance={handleSendMessage} class="flex absolute bottom-0 gap-2 m-1">
-    <InputFieldset name={INPUT.MESSAGE} size={8} bind:value={message} src="/icons/IconMessageSolid.svg" />
+    <InputFieldset placeholder="Message" name={INPUT.MESSAGE} size={8} bind:value={message} src="/icons/IconMessageSolid.svg" />
     <PrimaryButton type="submit">Send message</PrimaryButton>
   </form>
 </Frame>
@@ -78,7 +78,7 @@
 <Frame bottom={true} left={true}>
   {#each $page.data.leaderboard as leaderboardUser, i}
     <div
-      class="font-poppins-medium relative mx-auto text-sm w-[90%] p-3 mt-4 bg-secondary p-2 rounded">
+      class="font-poppins-medium relative mx-auto text-sm w-11/12 p-3 mt-4 bg-secondary p-2 rounded">
       <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} | Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRate(leaderboardUser)}
       <span class="absolute right-2">#{i + 1}</span>
     </div>

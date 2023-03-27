@@ -4,11 +4,8 @@
 	import MoveToShow from '@components/MoveToShow.svelte';
 
 	export let game: Game;
-	let opponentId: string;
-	let lostOrWin: 'lost' | 'win';
-
-	$: lostOrWin = game.whoWin[game.round - 1] === $user?.id ? 'win' : 'lost';
-	$: opponentId = game.players.find((playerId) => playerId !== $user?.id)!;
+	let opponentId = game.players.find((playerId) => playerId !== $user?.id)!;
+	let lostOrWin: 'lost' | 'win' = game.whoWin[game.round - 1] === $user?.id ? 'win' : 'lost';
 </script>
 
 

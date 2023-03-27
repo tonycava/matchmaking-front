@@ -14,7 +14,7 @@ export type Game = {
 export type GameInfo = {
 	gameId: string;
 
-	users: { users: [string, string] }
+	users: [string, string]
 }
 
 export type Some = string | null;

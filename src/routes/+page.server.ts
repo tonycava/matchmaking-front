@@ -32,6 +32,8 @@ export const actions: Actions = {
 		const form = await request.formData();
 		const message = form.get(INPUT.MESSAGE);
 
+		if (!message) return;
+
 		socket.emit(WEB_SOCKET_EVENT.CHAT, { userId: locals.user?.id, message });
 
 		return { success: true };
