@@ -33,7 +33,7 @@
     use:enhance={handleSubmit}
   >
     <InputFieldset placeholder="Username" name={INPUT.USERNAME} size={6} src="/icons/IconUserSolid.svg" />
-    <InputFieldset placeholder="Password" name={INPUT.PASSWORD} size={6} src="/icons/IconLockSolid.svg" />
+    <InputFieldset type='password' placeholder="Password" name={INPUT.PASSWORD} size={6} src="/icons/IconLockSolid.svg" />
     <slot />
   </form>
 </div>
