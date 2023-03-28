@@ -1,12 +1,14 @@
 import type { Action, Actions } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
-import { COOKEYS, defaultCookiesOptions, INPUT } from '$lib/utils';
+import { COOKEYS, defaultCookiesOptions, getBaseURL, INPUT } from '$lib/utils';
 import AuthService from '@services/auth.service';
 
 const register: Action = async ({ request, cookies }) => {
 	const form = await request.formData();
 	const username = form.get(INPUT.USERNAME) as string;
 	const password = form.get(INPUT.PASSWORD) as string;
+
+	console.log(getBaseURL())
 
 	const response = await AuthService.register(username, password)
 		.catch(e => {
