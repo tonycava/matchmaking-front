@@ -7,7 +7,6 @@ import { goto } from '$app/navigation';
 export enum INPUT {
 	USERNAME = 'username',
 	PASSWORD = 'password',
-
 	MESSAGE = 'message'
 }
 

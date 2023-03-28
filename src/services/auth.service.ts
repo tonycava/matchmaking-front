@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getBaseURL } from '$lib/utils';
 
 export const register = async (username: string, password: string) => {
+	console.log(getBaseURL())
 	return await axios.post(`${getBaseURL()}/auth/register`, { username, password });
 };
 
