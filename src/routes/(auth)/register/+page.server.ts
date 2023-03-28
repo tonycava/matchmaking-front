@@ -8,8 +8,6 @@ const register: Action = async ({ request, cookies }) => {
 	const username = form.get(INPUT.USERNAME) as string;
 	const password = form.get(INPUT.PASSWORD) as string;
 
-	console.log(getBaseURL())
-
 	const response = await AuthService.register(username, password)
 		.catch(e => {
 			console.log(e);

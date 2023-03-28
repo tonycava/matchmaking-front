@@ -3,6 +3,8 @@ import { browser } from '$app/environment';
 import { user } from '@stores/user.store';
 import Cookies from 'js-cookie';
 import { goto } from '$app/navigation';
+import { PUBLIC_API_URL, PUBLIC_EXTERNAL_API_URL } from '$env/static/public';
+
 
 export enum INPUT {
 	USERNAME = 'username',
@@ -10,7 +12,7 @@ export enum INPUT {
 	MESSAGE = 'message'
 }
 
-export const getBaseURL = () => browser ? import.meta.env.VITE_EXTERNAL_API_URL : import.meta.env.VITE_API_URL;
+export const getBaseURL = () => browser ? PUBLIC_EXTERNAL_API_URL : PUBLIC_API_URL;
 
 export const disconnect = async () => {
 	user.set(null);
