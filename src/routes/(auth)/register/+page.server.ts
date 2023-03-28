@@ -1,6 +1,6 @@
 import type { Action, Actions } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
-import { COOKEYS, defaultCookiesOptions, getBaseURL, INPUT } from '$lib/utils';
+import { COOKEYS, defaultCookiesOptions, INPUT } from '$lib/utils';
 import AuthService from '@services/auth.service';
 
 const register: Action = async ({ request, cookies }) => {
