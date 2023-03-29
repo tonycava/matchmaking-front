@@ -61,7 +61,7 @@
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 text-2xl">
 	<span class="flex-1">Welcome to AML-Matcher {$user?.username}</span>
-	<PrimaryButton css="flex-1" on:click={disconnect}>Logout</PrimaryButton>
+	<PrimaryButton on:click={disconnect}>Logout</PrimaryButton>
 </div>
 
 <div class="flex flex-1 h-screen justify-center items-center [&>button]:text-3xl">
