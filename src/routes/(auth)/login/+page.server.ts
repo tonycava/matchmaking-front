@@ -8,8 +8,10 @@ const login: Action = async ({ request, cookies }) => {
 	const username = form.get(INPUT.USERNAME) as string;
 	const password = form.get(INPUT.PASSWORD) as string;
 
-	const response = await AuthService.login(username, password)
-		.catch(e => ({ message: e.response.data.message || 'Internal server error' }));
+	const response = await AuthService.login(username, password).catch((e) => ({
+		message: e.response?.data?.message || 'Internal server error'
+	}));
+
 	if ('message' in response) {
 		const errors = response.message.split(';');
 		return fail(303, { internalError: errors?.at(0) || 'Internal server error' });
@@ -21,5 +23,5 @@ const login: Action = async ({ request, cookies }) => {
 };
 
 export const actions: Actions = {
-	login,
+	login
 };

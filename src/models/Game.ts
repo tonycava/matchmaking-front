@@ -1,3 +1,5 @@
+export type Some = string | null;
+export type Move = 'rock' | 'paper' | 'scissors';
 
 export type Game = {
 	state: 'choosing' | 'reveal' | 'finished';
@@ -5,17 +7,13 @@ export type Game = {
 	timerPlay: number;
 	timerRev: number;
 	players: [string, string];
-	whoWin: [Some, Some, Some]
+	whoWin: [Some, Some, Some];
 
-	actualPlay: Record<string, Move>
-}
-
+	actualPlay: Record<string, Move | string>;
+};
 
 export type GameInfo = {
 	gameId: string;
 
-	users: [string, string]
-}
-
-export type Some = string | null;
-export type Move = 'rock' | 'paper' | 'scissors';
+	users: [string, string];
+};

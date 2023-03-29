@@ -5,14 +5,13 @@ import Cookies from 'js-cookie';
 import { goto } from '$app/navigation';
 import { env } from '$env/dynamic/public';
 
-
 export enum INPUT {
 	USERNAME = 'username',
 	PASSWORD = 'password',
 	MESSAGE = 'message'
 }
 
-export const getBaseURL = () => browser ? env.PUBLIC_EXTERNAL_API_URL : env.PUBLIC_API_URL;
+export const getBaseURL = () => (browser ? env.PUBLIC_EXTERNAL_API_URL : env.PUBLIC_API_URL);
 
 export const disconnect = async () => {
 	user.set(null);
@@ -29,11 +28,11 @@ export enum WEB_SOCKET_EVENT {
 	JOIN_WAITING = 'joinWaiting',
 	CHAT = 'chat',
 	NEW_MESSAGE = 'newMessage',
-	PARTNER = 'partner',
+	PARTNER = 'partner'
 }
 
 export enum COOKEYS {
-	JWT_TOKEN = 'jwt_token',
+	JWT_TOKEN = 'jwt_token'
 }
 
 export const defaultCookiesOptions: CookieSerializeOptions = {
@@ -41,5 +40,5 @@ export const defaultCookiesOptions: CookieSerializeOptions = {
 	httpOnly: false,
 	sameSite: 'strict',
 	secure: process.env.NODE_ENV === 'production',
-	maxAge: 60 * 60 * 24 * 3,
+	maxAge: 60 * 60 * 24 * 3
 };

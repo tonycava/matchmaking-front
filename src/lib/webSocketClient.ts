@@ -5,6 +5,6 @@ const ENDPOINT = getBaseURL() ?? 'http://localhost:3000';
 
 const webSocketClient = io(ENDPOINT, {
 	transports: ['polling'],
-	withCredentials: true,
+	withCredentials: true
 });
 export default webSocketClient;
