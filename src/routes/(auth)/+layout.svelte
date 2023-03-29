@@ -5,7 +5,7 @@
 	import { INPUT } from '$lib/utils';
 	import type { FormActionResponse } from '@models/Error';
 
-	let isLoading = true;
+	let isLoading = false;
 	export let data;
 
 	const handleSubmit = (): FormActionResponse => {

@@ -8,7 +8,9 @@ import { env } from '$env/dynamic/public';
 export enum INPUT {
 	USERNAME = 'username',
 	PASSWORD = 'password',
-	MESSAGE = 'message'
+	MESSAGE = 'message',
+
+	PROFILE_PICTURE = 'profilePicture'
 }
 
 export const getBaseURL = () => (browser ? env.PUBLIC_EXTERNAL_API_URL : env.PUBLIC_API_URL);
@@ -40,5 +42,5 @@ export const defaultCookiesOptions: CookieSerializeOptions = {
 	httpOnly: false,
 	sameSite: 'strict',
 	secure: process.env.NODE_ENV === 'production',
-	maxAge: 60 * 60 * 24 * 3
+	maxAge: 60 * 60 * 24 * 3,
 };
