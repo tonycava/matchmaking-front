@@ -7,6 +7,7 @@
 	import { user } from '@stores/user.store';
 	import { WEB_SOCKET_EVENT } from '$lib/utils';
 	import { gameInfo } from '@stores/gameInfo.store';
+	import Loading from '@components/common/Loading.svelte';
 
 	onMount(() => {
 		window.addEventListener('beforeunload', () => {
@@ -23,9 +24,8 @@
 	socket.emit(WEB_SOCKET_EVENT.JOIN_WAITING, { userId: $user?.id, joinAt: new Date() });
 </script>
 
-<div class="flex justify-center items-center h-screen flex-col gap-8">
-	<span class="text-secondary text-3xl font-poppins-medium"
-		>You are now waiting another player !</span
-	>
+<div class="flex justify-center items-center h-screen flex-col gap-12">
+	<span class="text-secondary text-3xl font-poppins-medium">You are now waiting another player !</span>
+	<Loading absolute />
 	<PrimaryButton on:click={() => goto('/')}>Go back on the home page</PrimaryButton>
 </div>
