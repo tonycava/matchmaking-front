@@ -1,7 +1,6 @@
 <script lang="ts">
 	import socket from '$lib/webSocketClient';
 	import { user } from '@stores/user.store';
-	import { page } from '$app/stores';
 	import Cookies from 'js-cookie';
 	import { COOKEYS, disconnect, INPUT, WEB_SOCKET_EVENT } from '$lib/utils';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
@@ -15,10 +14,13 @@
 	import { applyAction, enhance } from '$app/forms';
 	import type { FormActionResponse } from '@models/Error';
 	import Svg from '@components/layout/Svg.svelte';
+	import type { PageServerData } from '../../.svelte-kit/types/src/routes/$types';
 
 	let message = '';
 	let chats: Chat[] = [];
 	let haveMoreChat = true;
+
+	export let data: PageServerData;
 
 	const RATIO = 11;
 	let range: Range = { start: 0, end: RATIO };
@@ -57,45 +59,43 @@
 		return `${((leaderboardUser.numberOfWins / leaderboardUser.numberOfLosses) * 100).toFixed(0)}%`;
 	};
 
-	$: chats = $page.data.chats;
+	$: chats = data.chats;
 </script>
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 gap-8 text-2xl">
-  <span class="flex-1">Welcome to AML-Matcher {$user?.username}</span>
-  <PrimaryButton on:click={() => goto("/profile")}>
-    <Svg size={6} src="/icons/IconUserSolid.svg" />
-  </PrimaryButton>
-  <PrimaryButton on:click={disconnect}>Logout</PrimaryButton>
+	<span class="flex-1">Welcome to AML-Matcher {$user?.username}</span>
+	<PrimaryButton on:click={() => goto('/profile')}>
+		<Svg size={6} src="/icons/IconUserSolid.svg" />
+	</PrimaryButton>
+	<PrimaryButton on:click={disconnect}>Logout</PrimaryButton>
 </div>
 
 <div class="flex flex-1 h-screen justify-center items-center [&>button]:text-3xl">
-  <PrimaryButton on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
+	<PrimaryButton on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
 </div>
 
 <Frame bottom={true} right={true} isReversed={true}>
-  {#each chats as chat, i}
-    <ChatCard isLast={i === chats.length - 1} {chat} {getMore} />
-  {/each}
-  <form method="POST" use:enhance={handleSendMessage} class="flex absolute bottom-0 gap-2 m-1">
-    <InputFieldset
-      placeholder="Message"
-      name={INPUT.MESSAGE}
-      size={8}
-      bind:value={message}
-      src="/icons/IconMessageSolid.svg"
-    />
-    <PrimaryButton type="submit">Send message</PrimaryButton>
-  </form>
+	{#each chats as chat, i}
+		<ChatCard isLast={i === chats.length - 1} {chat} {getMore} />
+	{/each}
+	<form method="POST" use:enhance={handleSendMessage} class="flex absolute bottom-0 gap-2 m-1">
+		<InputFieldset
+			placeholder="Message"
+			name={INPUT.MESSAGE}
+			size={8}
+			bind:value={message}
+			src="/icons/IconMessageSolid.svg"
+		/>
+		<PrimaryButton type="submit">Send message</PrimaryButton>
+	</form>
 </Frame>
 
 <Frame bottom={true} left={true}>
-  {#each $page.data.leaderboard as leaderboardUser, i}
-    <div
-      class="font-poppins-medium relative mx-auto text-sm w-11/12 p-3 mt-4 bg-secondary p-2 rounded"
-    >
-      <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} | Loose
-      : {leaderboardUser.numberOfLosses} | WRR : {getWinRate(leaderboardUser)}
-      <span class="absolute right-2">#{i + 1}</span>
-    </div>
-  {/each}
+	{#each data.leaderboard as leaderboardUser, i}
+		<div class="font-poppins-medium relative mx-auto text-sm w-11/12 mt-4 bg-secondary p-2 rounded">
+			<b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} | Loose
+			: {leaderboardUser.numberOfLosses} | WRR : {getWinRate(leaderboardUser)}
+			<span class="absolute right-2">#{i + 1}</span>
+		</div>
+	{/each}
 </Frame>

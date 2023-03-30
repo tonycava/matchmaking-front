@@ -30,7 +30,7 @@ export const load: PageServerLoad = async ({ cookies, locals }) => {
 export const actions: Actions = {
 	default: async ({ locals, request }) => {
 		const form = await request.formData();
-		const message = form.get(INPUT.MESSAGE);
+		const message = form.get(INPUT.MESSAGE) as string;
 
 		if (!message) return;
 

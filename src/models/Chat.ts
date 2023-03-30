@@ -6,6 +6,12 @@ export type Chat = {
 	user: { username: string };
 };
 
+export type AMLResponse<T> = {
+	code: number;
+	message: string;
+	data: T;
+};
+
 export type Range = {
 	start: number;
 	end: number;

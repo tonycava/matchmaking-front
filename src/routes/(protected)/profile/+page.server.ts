@@ -2,8 +2,7 @@ import type { PageServerLoad } from './$types';
 import { type Action, type Actions, fail } from '@sveltejs/kit';
 import { INPUT } from '$lib/utils';
 
-export const load: PageServerLoad = async ({ request }) => {
-
+export const load: PageServerLoad = async () => {
 	return {
 		test: '1',
 	};

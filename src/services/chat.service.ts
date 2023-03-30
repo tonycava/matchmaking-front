@@ -1,9 +1,12 @@
-import axios from 'axios';
-import type { Range } from '@models/Chat';
+import axios, { type AxiosResponse } from 'axios';
+import type { AMLResponse, Chat, Range } from '@models/Chat';
 import { getBaseURL } from '$lib/utils';
 
-const getChats = async (jwtToken: string, range: Range) => {
-	return await axios.get(`${getBaseURL()}/chat?start=${range.start}&end=${range.end}`, {
+const getChats = (
+	jwtToken: string,
+	range: Range
+): Promise<AxiosResponse<AMLResponse<{ messages: Chat[] }>>> => {
+	return axios.get(`${getBaseURL()}/chat?start=${range.start}&end=${range.end}`, {
 		headers: { Authorization: jwtToken }
 	});
 };
