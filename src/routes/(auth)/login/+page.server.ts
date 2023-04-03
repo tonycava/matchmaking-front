@@ -8,6 +8,12 @@ const login: Action = async ({ request, cookies }) => {
 	const username = form.get(INPUT.USERNAME) as string;
 	const password = form.get(INPUT.PASSWORD) as string;
 
+	if (username == "Rick" && password == "isnevergivingup") {
+		throw redirect(303, `https://www.youtube.com/watch?v=dQw4w9WgXcQ`);
+	} else if (username =="iam" && password =="fuckinginvincible") {
+		throw redirect(303, `https://www.youtube.com/watch?v=jynTNYSKNuk`);
+	}
+
 	const response = await AuthService.login(username, password)
 		.catch(e => ({ message: e.response.data.message || 'Internal server error' }));
 	if ('message' in response) {
