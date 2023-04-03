@@ -5,18 +5,19 @@
 	import type { GameInfo } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import { user } from '@stores/user.store';
+	import { WEB_SOCKET_EVENT } from '$lib/utils';
 
 	onMount(() => {
 		window.addEventListener('beforeunload', () => {
-			socket.emit('leaveWaiting', { userId: $user?.id });
+			socket.emit(WEB_SOCKET_EVENT.LEAVE_WAITING, { userId: $user?.id });
 		});
 	});
 
-	socket.on('partner', async (data: GameInfo) => {
+	socket.on(WEB_SOCKET_EVENT.PARTNER, async (data: GameInfo) => {
 		await goto(`/game/${data.gameId}`);
 	});
 
-	socket.emit('joinWaiting', { userId: $user?.id, joinAt: new Date() });
+	socket.emit(WEB_SOCKET_EVENT.JOIN_WAITING, { userId: $user?.id, joinAt: new Date() });
 </script>
 
 <div class="flex justify-center items-center h-screen flex-col gap-8">

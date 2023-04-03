@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Move } from '@models/Game';
-  import IconHandBackFistSolid from '@components/svg/IconHandBackFistSolid.svelte';
-  import IconHandSolid from '@components/svg/IconHandSolid.svelte';
-  import IconScissorsSolid from '@components/svg/IconScissorsSolid.svelte';
+  import IconHandBackFistSolid from '@components/icons/IconHandBackFistSolid.svelte';
+  import IconHandSolid from '@components/icons/IconHandSolid.svelte';
+  import IconScissorsSolid from '@components/icons/IconScissorsSolid.svelte';
 
   export let move: Move;
 </script>

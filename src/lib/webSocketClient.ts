@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
+import { getBaseURL } from '$lib/utils';
 
-const ENDPOINT = import.meta.env.VITE_EXTERNAL_API_URL ?? 'http://localhost:3000';
+const ENDPOINT = getBaseURL() ?? 'http://localhost:3000';
 
 const webSocketClient = io(ENDPOINT, {
 	withCredentials: true,

@@ -1,5 +1,11 @@
 import axios from 'axios';
+import type { Range } from '@models/Chat';
+import { getBaseURL } from '$lib/utils';
 
-export const getChat = async (token: string) => {
-	return await axios.get(`${import.meta.env.VITE_API_URL}/chat`, { headers: { Authorization: token } });
+const getChats = async (jwtToken: string, range: Range) => {
+	return await axios.get(`${getBaseURL()}/chat?start=${range.start}&end=${range.end}`, { headers: { Authorization: jwtToken } });
+};
+
+export default {
+	getChats,
 };
