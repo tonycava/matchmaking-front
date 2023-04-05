@@ -10,7 +10,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"start": "vite dev --port 11001",
+		"start": "vite dev --port 11002",
 		"cy:run": "cypress run --record --key 4ea71334-f400-4ad0-8cb7-d5bf47f3603c",
 		"test": "start-server-and-test start http-get://localhost:11002 cy:run"
 	},
