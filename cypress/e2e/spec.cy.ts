@@ -8,6 +8,7 @@ describe('contains username', () => {
   it('passes', () => {
     cy.visit('http://localhost:11001/login')
     cy.get('input[name=username]').type('test')
+    cy.get('input[name=username]').should('have.value', 'test')
   })
 })
 
