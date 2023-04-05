@@ -3,10 +3,10 @@ export type Chat = {
 	userId: string;
 	content: string;
 	createdAt: Date;
-	user: { username: string }
+	user: { username: string };
 };
 
 export type Range = {
 	start: number;
 	end: number;
-}
+};

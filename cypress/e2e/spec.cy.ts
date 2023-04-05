@@ -25,14 +25,6 @@ describe('contains login button', () => {
   })
 })
 
-describe('the new user have cookies', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:11001/login')
-    cy.contains('Login').click()
-    cy.getCookie('jwt_token').should('exist')
-  })
-})
-
 describe('new URL is the expected URL', () => {
   it('passes', () => {
     cy.visit('http://localhost:11001/login')

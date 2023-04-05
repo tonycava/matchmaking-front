@@ -5,8 +5,8 @@
 	export let scores: [Some, Some, Some];
 </script>
 
-
-<div class="text-3xl flex-1 justify-center text-secondary flex m-4 relative gap-4">Score :
+<div class="text-3xl flex-1 justify-center text-secondary flex m-4 relative gap-4">
+  Score :
   <div class="flex gap-4">
     {#each scores as score}
       {#if score === null}

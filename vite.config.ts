@@ -6,18 +6,18 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	server: {
 		watch: {
-			usePolling: true,
+			usePolling: true
 		},
 		host: true, // needed for the DC port mapping to work
 		strictPort: true,
-		port: +(process.env.PORT ?? '3000'),
+		port: +(process.env.PORT ?? '3000')
 	},
 	resolve: {
 		alias: {
 			'@components': path.resolve('./src/components'),
 			'@stores': path.resolve('./src/stores'),
 			'@services': path.resolve('./src/services'),
-			'@models': path.resolve('./src/models'),
+			'@models': path.resolve('./src/models')
 		}
 	}
 });

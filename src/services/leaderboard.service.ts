@@ -6,5 +6,5 @@ const getLeaderboard = async (jwtToken: string) => {
 };
 
 export default {
-	getLeaderboard,
+	getLeaderboard
 };

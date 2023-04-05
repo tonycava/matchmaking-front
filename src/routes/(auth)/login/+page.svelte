@@ -6,16 +6,13 @@
 </script>
 
 <div class="flex justify-center flex flex-col gap-1">
-  {#if form?.internalError}
-    <span class="text-sm text-red-600 text-center font-poppins-bold">{form?.internalError}</span>
-  {/if}
-  <PrimaryButton type="submit">Login</PrimaryButton>
+	{#if form?.internalError}
+		<span class="text-sm text-red-600 text-center font-poppins-bold">{form?.internalError}</span>
+	{/if}
+	<PrimaryButton type="submit">Login</PrimaryButton>
 </div>
 
 <span class="absolute text-sm bottom-0 left-0 p-3 text-secondary font-poppins-medium">
-  Don't have an account ?
-  <a
-    class="font-poppins-bold"
-    href="/register">Register !
-  </a>
+	Don't have an account ?
+	<a class="font-poppins-bold" href="/register">Register ! </a>
 </span>

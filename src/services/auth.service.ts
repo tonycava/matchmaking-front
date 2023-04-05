@@ -11,5 +11,5 @@ export const login = async (username: string, password: string) => {
 
 export default {
 	register,
-	login,
+	login
 };
