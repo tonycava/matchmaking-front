@@ -11,7 +11,7 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"start": "vite dev --port 11002",
-		"cy:run": "cypress run --record --key 4ea71334-f400-4ad0-8cb7-d5bf47f3603c",
+		"cy:run": "xvfb-run cypress run --record --key 4ea71334-f400-4ad0-8cb7-d5bf47f3603c --headed --browser chrome --spec 'cypress/integration/non-prod/**'",
 		"test": "start-server-and-test start http-get://localhost:11002 cy:run"
 	},
 	"devDependencies": {
