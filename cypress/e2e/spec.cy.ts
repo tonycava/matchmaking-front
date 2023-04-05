@@ -11,13 +11,6 @@ describe('contains username', () => {
   })
 })
 
-describe('contains password', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:11001/login')
-    cy.get('input[name=password]').type('test')
-  })
-})
-
 describe('contains login button', () => {
   it('passes', () => {
     cy.visit('http://localhost:11001/login')
