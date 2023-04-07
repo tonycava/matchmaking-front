@@ -13,7 +13,7 @@
   <GoBack href="/" size={10} />
 </div>
 
-<div class="flex m-8 mt-16">
+<div class="flex m-8 mt-16 w-full">
   <div class="relative w-fit">
     <EditableProfilePicture userData={data.user} />
     <h2 class="text-secondary mt-4 text-center text-2xl font-poppins-medium">{data.user.username}</h2>
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<Frame ulCss="h-full" bottom={true} right={true}>
+<Frame ulCss="h-full lg:m-0 my:auto" bottom={true} right={true}>
   {#if data.chats.length > 0}
     {#each data.chats as chat}
       <ChatCard addClasses="!w-[95%] mx-auto" chat={chat} isLast={false} getMore={() => undefined} />
