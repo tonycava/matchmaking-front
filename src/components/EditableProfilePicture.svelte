@@ -14,7 +14,7 @@
 		};
 	};
 
-	export let userData: User & { profilePicture: string; };
+	export let userData: User & { profilePicture: string | null; numberOfWins: number; numberOfLoses: number; };
 </script>
 
 <img

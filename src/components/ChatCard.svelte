@@ -5,7 +5,7 @@
 
 	export let isLast: boolean;
 	export let chat: Chat;
-	export let getMore: () => void;
+	export let getMore: () => void | undefined;
 	export let addClasses = '';
 
 	const options: Options = { rootMargin: '100px' };
