@@ -2,7 +2,7 @@ import { type Action, type Actions, fail, redirect } from '@sveltejs/kit';
 import { COOKEYS, INPUT } from '$lib/utils';
 import UserService from '@services/user.service';
 
-const uploadProfilePicture: Action = async ({ request, cookies, locals, url, params }) => {
+const uploadProfilePicture: Action = async ({ request, cookies, locals, params }) => {
 	const form = await request.formData();
 	const profilePicture = form.get(INPUT.PROFILE_PICTURE) as File;
 
