@@ -24,8 +24,8 @@
 	socket.emit(WEB_SOCKET_EVENT.JOIN_WAITING, { userId: $user?.id, joinAt: new Date() });
 </script>
 
-<div class="flex justify-center items-center h-screen flex-col gap-12">
-	<span class="text-secondary text-3xl font-poppins-medium">You are now waiting another player !</span>
-	<Loading absolute />
+<div class="flex justify-center items-center h-screen flex-col">
+	<span class="text-secondary text-3xl font-poppins-medium text-center p-4">You are now waiting another player !</span>
+	<Loading />
 	<PrimaryButton on:click={() => goto('/')}>Go back on the home page</PrimaryButton>
 </div>

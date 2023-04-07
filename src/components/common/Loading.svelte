@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="lds-ellipsis w-[80px] h-[80px] my-auto {absolute
+	class="lds-ellipsis w-[80px] h-[80px] {absolute
 		? 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10'
 		: 'relative'}"
 >
