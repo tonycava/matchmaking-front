@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { PageServerParentData } from './$types';
-	export let data: PageServerParentData;
+	import type { PageParentData } from './$types';
+	export let data: PageParentData;
 </script>
 
 <div></div>
