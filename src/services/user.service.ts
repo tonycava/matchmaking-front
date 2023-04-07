@@ -1,12 +1,12 @@
 import axios, { type AxiosResponse } from 'axios';
-import type { AMLResponse } from '@models/Chat';
+import type { AMLResponse, Chat } from '@models/Chat';
 import { getBaseURL } from '$lib/utils';
 import type { User } from '@models/User';
 
 const getUser = (
 	jwtToken: string,
 	userId: string,
-): Promise<AxiosResponse<AMLResponse<User & { profilePicture: string | null }>>> => {
+): Promise<AxiosResponse<AMLResponse<{ user: User & { profilePicture: string | null }, chats: Chat[] }>>> => {
 	return axios.get(`${getBaseURL()}/user`, {
 		headers: {
 			Authorization: jwtToken,
