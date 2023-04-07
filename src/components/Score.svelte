@@ -5,7 +5,7 @@
 	export let scores: [Some, Some, Some];
 </script>
 
-<div class="text-3xl flex-1 justify-center text-secondary flex m-4 relative gap-4">
+<div class="text-3xl flex-1 flex gap-2 items-center justify-center text-secondary m-4 relative">
   Score :
   <div class="flex gap-4">
     {#each scores as score}
