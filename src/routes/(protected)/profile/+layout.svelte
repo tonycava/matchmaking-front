@@ -13,7 +13,7 @@
   <GoBack href="/" size={10} />
 </div>
 
-<div class="flex m-8 mt-16 w-full">
+<div class="flex m-8 mt-16">
   <div class="relative w-fit">
     <EditableProfilePicture userData={data.user} />
     <h2 class="text-secondary mt-4 text-center text-2xl font-poppins-medium">{data.user.username}</h2>
