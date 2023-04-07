@@ -2,7 +2,7 @@ import { type Action, type Actions, fail, redirect } from '@sveltejs/kit';
 import { COOKEYS, INPUT } from '$lib/utils';
 import UserService from '@services/user.service';
 
-const uploadProfilePicture: Action = async ({ request, cookies, locals }) => {
+const uploadProfilePicture: Action = async ({ request, cookies, locals, url, params }) => {
 	const form = await request.formData();
 	const profilePicture = form.get(INPUT.PROFILE_PICTURE) as File;
 
@@ -21,7 +21,7 @@ const uploadProfilePicture: Action = async ({ request, cookies, locals }) => {
 		throw redirect(303, '/login');
 	}
 
-	throw redirect(303, "/profile");
+	throw redirect(303, `/profile/${params.userId}`);
 };
 export const actions: Actions = {
 	uploadProfilePicture,

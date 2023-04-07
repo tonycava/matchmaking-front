@@ -14,7 +14,7 @@
 		};
 	};
 
-	export let userData: User & { profilePicture: string | null; numberOfWins: number; numberOfLoses: number; };
+	export let userData: User & { numberOfWins: number; numberOfLoses: number; };
 </script>
 
 <img
@@ -30,8 +30,7 @@
     method="POST"
     enctype="multipart/form-data"
   >
-    <label
-      for="file-upload" class="absolute top-0 -right-3 bg-secondary p-3 rounded-full">
+    <label for="file-upload" class="absolute top-0 -right-3 bg-secondary p-3 rounded-full">
       <Svg src="/icons/IconPenSolid.svg" size={6} />
     </label>
     <input

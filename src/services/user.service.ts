@@ -7,7 +7,7 @@ const getUser = (
 	jwtToken: string,
 	userId: string,
 ): Promise<AxiosResponse<AMLResponse<{
-	user: User & { profilePicture: string | null, numberOfWins: number, numberOfLoses: number },
+	user: User & { numberOfWins: number, numberOfLoses: number },
 	chats: Chat[]
 }>>> => {
 	return axios.get(`${getBaseURL()}/user`, {

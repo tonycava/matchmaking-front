@@ -17,6 +17,8 @@ export const load: LayoutServerLoad = async ({ cookies, locals, params }) => {
 
 	const { user, chats } = response.data.data;
 
+	console.log('user', user.id);
+
 	return {
 		user,
 		chats,
