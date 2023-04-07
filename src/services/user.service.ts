@@ -6,7 +6,10 @@ import type { User } from '@models/User';
 const getUser = (
 	jwtToken: string,
 	userId: string,
-): Promise<AxiosResponse<AMLResponse<{ user: User & { profilePicture: string | null }, chats: Chat[] }>>> => {
+): Promise<AxiosResponse<AMLResponse<{
+	user: User & { profilePicture: string | null, numberOfWins: number, numberOfLoses: number },
+	chats: Chat[]
+}>>> => {
 	return axios.get(`${getBaseURL()}/user`, {
 		headers: {
 			Authorization: jwtToken,

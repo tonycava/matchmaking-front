@@ -33,6 +33,16 @@ export enum WEB_SOCKET_EVENT {
 	PARTNER = 'partner'
 }
 
+export const getWinRateRation = (numberOfWins: number, numberOfLosses: number) => {
+	if (numberOfWins === 0 && numberOfLosses === 0)
+		return 'No game !';
+
+	if (numberOfWins === 0) return '0%';
+	if (numberOfLosses === 0) return '100%';
+
+	return `${((numberOfWins / numberOfLosses) * 100).toFixed(0)}%`;
+};
+
 export enum COOKEYS {
 	JWT_TOKEN = 'jwt_token'
 }
