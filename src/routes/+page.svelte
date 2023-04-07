@@ -52,7 +52,7 @@
 </script>
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 gap-8 text-2xl">
-  <span class="flex-1">Welcome to AML-Matcher {$user?.username}</span>
+  <span class="flex-1">Welcome to ALM-Matcher {$user?.username}</span>
   <PrimaryButton on:click={() => goto('/profile')}>
     <Svg size={6} src="/icons/IconUserSolid.svg" />
   </PrimaryButton>

@@ -30,7 +30,7 @@
 <Frame ulCss="h-full" bottom={true} right={true}>
   {#if data.chats.length > 0}
     {#each data.chats as chat}
-      <ChatCard addClasses="w-[95%] mx-auto" chat={chat} isLast={false} />
+      <ChatCard addClasses="!w-[95%] mx-auto" chat={chat} isLast={false} />
     {/each}
   {:else}
     <h2 class="flex justify-center items-center text-2xl text-secondary h-full">No chats !</h2>
