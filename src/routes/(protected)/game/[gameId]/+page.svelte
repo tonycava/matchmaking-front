@@ -11,7 +11,7 @@
 	import { gameInfo } from '@stores/gameInfo.store';
 
 	let game: Game = {
-		state: 'reveal',
+		state: 'finished',
 		whoWin: [null, null, null],
 		round: 1,
 		actualPlay: {
