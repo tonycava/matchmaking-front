@@ -55,6 +55,8 @@
 	{/if}
 	<div class="flex flex-col gap-8 [&>button]:text-xl">
 		<PrimaryButton css="mx-auto" on:click={() => goto('/waiting')}>Go play another !</PrimaryButton>
-		<PrimaryButton css="mx-auto" on:click={() => goto('/')}>Go back to the home page !</PrimaryButton>
+		<PrimaryButton css="mx-auto" on:click={() => goto('/')}
+			>Go back to the home page !</PrimaryButton
+		>
 	</div>
 </div>

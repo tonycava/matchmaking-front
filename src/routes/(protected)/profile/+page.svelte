@@ -4,4 +4,4 @@
 	export let data: LayoutServerData;
 </script>
 
-<div></div>
+<div />

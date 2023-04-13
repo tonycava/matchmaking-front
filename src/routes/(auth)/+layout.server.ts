@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from '../../../.svelte-kit/types/src/routes/$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: PageServerLoad = ({ locals, url }) => {
+export const load: LayoutServerLoad = ({ locals, url }) => {
 	if (locals.user) throw redirect(303, `/`);
 
 	const path = url.pathname;

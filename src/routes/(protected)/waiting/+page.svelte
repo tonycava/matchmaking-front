@@ -25,7 +25,9 @@
 </script>
 
 <div class="flex justify-center items-center h-screen flex-col">
-	<span class="text-secondary text-3xl font-poppins-medium text-center p-4">You are now waiting another player !</span>
+	<span class="text-secondary text-3xl font-poppins-medium text-center p-4"
+		>You are now waiting another player !</span
+	>
 	<Loading />
 	<PrimaryButton on:click={() => goto('/')}>Go back on the home page</PrimaryButton>
 </div>

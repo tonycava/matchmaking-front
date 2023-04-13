@@ -3,4 +3,4 @@
 	export let data: PageParentData;
 </script>
 
-<div></div>
+<div />

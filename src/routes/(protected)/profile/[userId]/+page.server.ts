@@ -13,8 +13,11 @@ const uploadProfilePicture: Action = async ({ request, cookies, locals, params }
 	const logoBuffer = await profilePicture.arrayBuffer();
 	const logoBase64 = Buffer.from(logoBuffer).toString('base64');
 
-	const response = await UserService.uploadProfilePicture(jwtToken, locals.user?.id ?? '', logoBase64)
-		.catch(() => undefined);
+	const response = await UserService.uploadProfilePicture(
+		jwtToken,
+		locals.user?.id ?? '',
+		logoBase64
+	).catch(() => undefined);
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
@@ -24,5 +27,5 @@ const uploadProfilePicture: Action = async ({ request, cookies, locals, params }
 	throw redirect(303, `/profile/${params.userId}`);
 };
 export const actions: Actions = {
-	uploadProfilePicture,
+	uploadProfilePicture
 };

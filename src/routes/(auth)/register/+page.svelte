@@ -1,9 +1,6 @@
 <script lang="ts">
 	import type { FormResponse } from '@models/Error';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
-	import { getBaseURL } from '$lib/utils';
-
-	console.log(getBaseURL());
 
 	export let form: FormResponse;
 </script>

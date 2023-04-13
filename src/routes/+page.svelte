@@ -13,7 +13,7 @@
 	import { applyAction, enhance } from '$app/forms';
 	import type { FormActionResponse } from '@models/Error';
 	import Svg from '@components/layout/Svg.svelte';
-	import type { PageServerData } from '../../.svelte-kit/types/src/routes/$types';
+	import type { PageServerData } from './$types';
 
 	let message = '';
 	let chats: Chat[] = [];
@@ -31,7 +31,9 @@
 		};
 	};
 
-	socket.on(WEB_SOCKET_EVENT.NEW_MESSAGE, (chat: Chat) => (chats = [chat, ...chats]));
+	socket.on(WEB_SOCKET_EVENT.NEW_MESSAGE, (chat: Chat) => {
+		chats = [chat, ...chats];
+	});
 
 	const getMore = async () => {
 		if (!haveMoreChat) return;
@@ -52,45 +54,55 @@
 </script>
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 gap-8 text-2xl">
-  <span class="flex-1">Welcome to ALM-Matcher {$user?.username}</span>
-  <PrimaryButton css="h-fit" on:click={() => goto('/profile')}>
-    <Svg size={6} src="/icons/IconUserSolid.svg" />
-  </PrimaryButton>
-  <PrimaryButton css="h-fit" on:click={disconnect}>Logout</PrimaryButton>
+	<span class="flex-1">Welcome to ALM-Matcher {$user?.username}</span>
+	<PrimaryButton css="h-fit" on:click={() => goto('/profile')}>
+		<Svg size={6} src="/icons/IconUserSolid.svg" />
+	</PrimaryButton>
+	<PrimaryButton css="h-fit" on:click={disconnect}>Logout</PrimaryButton>
 </div>
 
-<div class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center">
-  <PrimaryButton on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
+<div
+	class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center"
+>
+	<PrimaryButton on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
 </div>
 
 <div class="flex gap-4 flex-col mt-10 justify-center">
-  <Frame css="block relative md:w-96 w-full m-2" bottom={true} right={true} isReversed={true}>
-    {#each chats as chat, i}
-      <ChatCard isLast={i === chats.length - 1} {chat} {getMore} />
-    {/each}
-    <form method="POST" use:enhance={handleSendMessage} class="flex absolute bottom-0 gap-2 m-1 w-full">
-      <div class="flex w-full gap-2">
-        <InputFieldset
-          placeholder="Message"
-          addClasses="w-[calc(100%-9rem)]"
-          name={INPUT.MESSAGE}
-          size={8}
-          bind:value={message}
-          src="/icons/IconMessageSolid.svg"
-        />
-        <PrimaryButton type="submit">Send message</PrimaryButton>
+	<Frame css="block relative md:w-96 w-full m-2" bottom={true} right={true} isReversed={true}>
+		{#each chats as chat, i}
+			<ChatCard isLast={i === chats.length - 1} {chat} {getMore} />
+		{/each}
+		<form
+			method="POST"
+			use:enhance={handleSendMessage}
+			class="flex absolute bottom-0 gap-2 m-1 w-full"
+		>
+			<div class="flex w-full gap-2">
+				<InputFieldset
+					placeholder="Message"
+					addClasses="w-[calc(100%-9rem)]"
+					name={INPUT.MESSAGE}
+					size={8}
+					bind:value={message}
+					src="/icons/IconMessageSolid.svg"
+				/>
+				<PrimaryButton type="submit">Send message</PrimaryButton>
+			</div>
+		</form>
+	</Frame>
 
-      </div>
-    </form>
-  </Frame>
-
-  <Frame css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
-    {#each data.leaderboard as leaderboardUser, i}
-      <div class="font-poppins-medium relative mx-auto text-sm w-11/12 mt-4 bg-secondary p-2 rounded">
-        <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} | Loose
-        : {leaderboardUser.numberOfLosses} | WRR : {getWinRateRation(leaderboardUser.numberOfWins, leaderboardUser.numberOfLosses)}
-        <span class="absolute right-2">#{i + 1}</span>
-      </div>
-    {/each}
-  </Frame>
+	<Frame css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
+		{#each data.leaderboard as leaderboardUser, i}
+			<div
+				class="font-poppins-medium relative mx-auto text-sm w-11/12 mt-4 bg-secondary p-2 rounded"
+			>
+				<b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} |
+				Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRateRation(
+					leaderboardUser.numberOfWins,
+					leaderboardUser.numberOfLosses
+				)}
+				<span class="absolute right-2">#{i + 1}</span>
+			</div>
+		{/each}
+	</Frame>
 </div>

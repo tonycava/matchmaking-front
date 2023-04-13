@@ -17,9 +17,13 @@
 	</div>
 
 	{#if game.whoWin[game.round - 1] === null}
-		<span class="text-3xl text-secondary text-center p-2">Which mean that this round is a draw !</span>
+		<span class="text-3xl text-secondary text-center p-2"
+			>Which mean that this round is a draw !</span
+		>
 	{:else}
-		<span class="text-3xl text-secondary text-center p-2">Which mean that you {lostOrWin} this round !</span>
+		<span class="text-3xl text-secondary text-center p-2"
+			>Which mean that you {lostOrWin} this round !</span
+		>
 	{/if}
 
 	<div

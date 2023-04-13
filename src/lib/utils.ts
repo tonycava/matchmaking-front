@@ -34,8 +34,7 @@ export enum WEB_SOCKET_EVENT {
 }
 
 export const getWinRateRation = (numberOfWins: number, numberOfLosses: number) => {
-	if (numberOfWins === 0 && numberOfLosses === 0)
-		return 'No game !';
+	if (numberOfWins === 0 && numberOfLosses === 0) return 'No game !';
 
 	if (numberOfWins === 0) return '0%';
 	if (numberOfLosses === 0) return '100%';
@@ -50,7 +49,7 @@ export enum COOKEYS {
 export const defaultCookiesOptions: CookieSerializeOptions = {
 	path: '/',
 	httpOnly: false,
-	sameSite: 'strict',
+	// sameSite: 'strict',
 	secure: process.env.NODE_ENV === 'production',
-	maxAge: 60 * 60 * 24 * 3,
+	maxAge: 60 * 60 * 24 * 3
 };

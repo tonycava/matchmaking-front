@@ -7,8 +7,7 @@ export const load: LayoutServerLoad = async ({ cookies, locals, params }) => {
 	const jwtToken = cookies.get(COOKEYS.JWT_TOKEN) ?? '';
 	const userId = params.userId ? params.userId : locals.user?.id ?? '';
 
-	const response = await UserService.getUser(jwtToken, userId)
-		.catch(() => undefined);
+	const response = await UserService.getUser(jwtToken, userId).catch(() => undefined);
 
 	if (!response || !response.data.data) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
@@ -17,10 +16,8 @@ export const load: LayoutServerLoad = async ({ cookies, locals, params }) => {
 
 	const { user, chats } = response.data.data;
 
-	console.log('user', user.id);
-
 	return {
 		user,
-		chats,
+		chats
 	};
 };
