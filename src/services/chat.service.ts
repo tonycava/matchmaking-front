@@ -1,6 +1,7 @@
 import axios, { type AxiosResponse } from 'axios';
-import type { AMLResponse, Chat, Range } from '@models/Chat';
+import type { AMLResponse } from '@models/Chat';
 import { getBaseURL } from '$lib/utils';
+import type { Chat, Range } from 'matchmaking-shared';
 
 const getChats = (
 	jwtToken: string,

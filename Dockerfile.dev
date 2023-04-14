@@ -5,6 +5,8 @@ WORKDIR /app
 COPY ./front/package.json ./front/yarn.lock ./
 COPY ./shared ./shared
 
+RUN sed -i -e 's/:..\/shared/:\/app\/shared/g' package.json
+
 RUN yarn install
 COPY ./front .
 
