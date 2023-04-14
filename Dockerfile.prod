@@ -1,14 +1,15 @@
 FROM node:16.18-alpine3.16 as deps
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY ./front/package.json ./front/yarn.lock ./
+RUN yarn install --frozen-lockfile --production
 
 FROM node:16.18-alpine3.16 as builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY ./front/. .
+
 RUN yarn exec svelte-kit sync
 RUN yarn build
 
