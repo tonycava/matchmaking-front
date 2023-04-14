@@ -1,38 +1,32 @@
-# create-svelte
+# Running Matchmaking Frontend
+This guide will help you set up, run, and build a Next.js app using the T3 stack. Follow the steps below to get started.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## 📦 Step 1: Install Dependencies
+Install all the necessary dependencies for your project by running the following command:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+yarn install
 ```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 🚀 Step 2: Launch the Development Server
+Start the development server by executing the following command:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+yarn run dev
 ```
 
-## Building
+## 🌐 Step 3: Access the App in Your Browser
+Open your browser and navigate to localhost:3000 to see your app in action.
 
-To create a production version of your app:
+## 🏗 Step 4: Build the App for Production 🐳
+To create a production-ready build of your app, run the following command:
 
 ```bash
-npm run build
+docker build -f Dockerfile.prod -t <your-image-name> .
 ```
 
-You can preview the production build with `npm run preview`.
+## :sunglasses: Step 5: Launch the App for Production 🐳
+To create a production-ready build of your app, run the following command:
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```bash
+docker run -p 3000:3000 -d <your-image-name>
+```
