@@ -101,7 +101,7 @@ docker run -p 3000:3000 -d <your-image-name>
 kubectl -f k8s/env.yml create
 ```
 
-## :outbox_tray: Step 3 : Create the deployment
+## :outbox_tray: Step 3 : Create the app deployment
 
 ```bash
 kubectl -f k8s/deployment.yml create
