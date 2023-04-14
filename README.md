@@ -125,4 +125,4 @@ $(minikube ip) matchmaking-front.info
 http://matchmaking-front.info
 ```
 
-<h6 align="left">[top](#top)</h6>
+[top](#top)
