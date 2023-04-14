@@ -1,4 +1,4 @@
-# Running Matchmaking Frontend
+# <h1 id="top">Running Matchmaking Frontend</h1>
 
 This guide will help you set up, run, and build a Next.js app using the T3 stack. Follow the steps below to get started.
 
@@ -113,7 +113,7 @@ kubectl -f k8s/deployment.yml create
 kubectl -f k8s/ingress.yml create
 ```
 
-## :pencil2: Step 5 : If you are on linux modify your `/etc/hosts` file and add the following line
+## :black_nib: Step 5 : If you are on linux modify your `/etc/hosts` file and add the following line
 
 ```bash
 $(minikube ip) matchmaking-front.info
@@ -124,3 +124,5 @@ $(minikube ip) matchmaking-front.info
 ```bash
 http://matchmaking-front.info
 ```
+
+<h6 align="left">[top](#top)</h6>
