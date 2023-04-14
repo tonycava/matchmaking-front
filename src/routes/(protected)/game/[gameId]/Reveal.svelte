@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Game } from '@models/Game';
 	import { user } from '@stores/user.store';
 	import MoveToShow from '@components/MoveToShow.svelte';
+	import type { Game } from 'matchmaking-shared';
 
 	export let game: Game;
 	let opponentId = game.players.find((playerId) => playerId !== $user?.id)!;

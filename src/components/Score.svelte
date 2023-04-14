@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Some } from '@models/Game';
 	import { user } from '@stores/user.store.js';
+	import type { Some } from 'matchmaking-shared';
 
 	export let scores: [Some, Some, Some];
 </script>

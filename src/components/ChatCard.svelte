@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { inview, type Options } from 'svelte-inview';
-	import type { Chat } from '@models/Chat';
 	import { user } from '@stores/user.store.js';
+	import type { Chat } from 'matchmaking-shared';
 
 	export let isLast: boolean;
 	export let chat: Chat;

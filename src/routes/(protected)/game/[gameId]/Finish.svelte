@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Game } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import { goto } from '$app/navigation';
 	import { user } from '@stores/user.store';
+	import type { Game } from 'matchmaking-shared';
 
 	type Win = 'draw' | 'win' | 'lost';
 	export let game: Game;

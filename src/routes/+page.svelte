@@ -4,7 +4,6 @@
 	import Cookies from 'js-cookie';
 	import { COOKEYS, disconnect, getWinRateRation, INPUT, WEB_SOCKET_EVENT } from '$lib/utils';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
-	import type { Chat, Range } from '@models/Chat';
 	import { goto } from '$app/navigation';
 	import ChatCard from '@components/ChatCard.svelte';
 	import ChatService from '@services/chat.service';
@@ -14,6 +13,7 @@
 	import type { FormActionResponse } from '@models/Error';
 	import Svg from '@components/layout/Svg.svelte';
 	import type { PageServerData } from './$types';
+	import type { Chat, Range } from 'matchmaking-shared';
 
 	let message = '';
 	let chats: Chat[] = [];

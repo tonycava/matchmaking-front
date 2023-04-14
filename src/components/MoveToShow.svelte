@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Move } from '@models/Game';
 	import IconHandBackFistSolid from '@components/icons/IconHandBackFistSolid.svelte';
 	import IconHandSolid from '@components/icons/IconHandSolid.svelte';
 	import IconScissorsSolid from '@components/icons/IconScissorsSolid.svelte';
+	import type { Move } from 'matchmaking-shared';
 
 	export let move: Move | string;
 </script>
