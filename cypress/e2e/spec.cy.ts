@@ -1,5 +1,4 @@
-const PORT: number = +process.env.PORT || 11001;
-
+const PORT = Cypress.env('PORT')
 
 describe('template spec', () => {
 	it('passes', () => {
