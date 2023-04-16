@@ -3,7 +3,7 @@ WORKDIR /app
 
 COPY ./frontend/package.json ./frontend/yarn.lock ./
 
-RUN sed -i -e 's/:..\/shared/:\/app\/shared/g' ./frontend/package.json
+RUN sed -i -e 's/:..\/shared/:\/app\/shared/g' package.json
 
 RUN yarn install --frozen-lockfile --production
 
