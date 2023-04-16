@@ -9,7 +9,7 @@ describe('template spec', () => {
 describe('contains username', () => {
 	it('passes', () => {
 		cy.visit(`http://localhost:${PORT}/login`);
-		cy.get('input[name=username]').type('test');
+		cy.get('input[name=username]').type('test', { delay: 50 });
 		cy.get('input[name=username]').should('have.value', 'test');
 	});
 });
