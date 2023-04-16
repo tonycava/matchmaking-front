@@ -2,13 +2,13 @@ FROM node:16.18-alpine3.16
 EXPOSE 3000
 WORKDIR /app
 
-COPY ./front/package.json ./front/yarn.lock ./
+COPY ./frontend/package.json ./frontend/yarn.lock ./
 COPY ./shared ./shared
 
 RUN sed -i -e 's/:..\/shared/:\/app\/shared/g' package.json
 
 RUN yarn install
-COPY ./front .
+COPY ./frontend .
 
 
 CMD ["yarn", "dev"]
