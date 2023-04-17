@@ -2,7 +2,7 @@
 
 describe('main spec', () => {
     beforeEach(() => {
-        cy.login()
+        cy.register()
         cy.getCookie('jwt_token')
         cy.visit('/');
     });

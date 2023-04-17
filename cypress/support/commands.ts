@@ -1,15 +1,11 @@
 /// <reference types="cypress" />
-Cypress.Commands.add("login", () => {
+Cypress.Commands.add("register", () => {
     cy.request({
         method: 'POST',
-        url: 'http://localhost:8090/auth/login',
+        url: 'http://localhost:8090/auth/register',
         body: {
-            username: 'escaffre.lucas2003@gmail.com',
+            username: 'MyAtoMixX',
             password: 'Root1234!'
-        },
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI1YzEwZTk0LTc4YmQtNGQ1NC1iYTg0LTg0MzgyNzFiMDFiYiIsInVzZXJuYW1lIjoibTRjaHQiLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTIyVDEyOjQ4OjM3LjU1OVoiLCJpYXQiOjE2Nzk0ODkzMTcsImV4cCI6MTY4MDA5NDExN30.4E444nwD-ZDO35gDUwoNoGuagmAoztLHAJc6yPDRvsg'
         }
     }).then((response) => {
         cy.setCookie('jwt_token', response.body.data.token);

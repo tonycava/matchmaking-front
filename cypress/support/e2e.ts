@@ -20,7 +20,7 @@ export {}
 declare global {
     namespace Cypress {
         interface Chainable {
-            login(): Chainable<void>;
+            register(): Chainable<void>;
         }
     }
 }
