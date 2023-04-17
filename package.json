@@ -11,7 +11,7 @@
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --record --key 4ea71334-f400-4ad0-8cb7-d5bf47f3603c"
+    "cy:run": "cypress run --record --key a6ffaa32-4148-4c16-9b03-015e9f82b5d1"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",

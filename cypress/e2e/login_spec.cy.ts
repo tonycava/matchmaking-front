@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-describe('/login', () => {
+describe('login spec', () => {
     beforeEach(() => {
       cy.visit('/login');
       cy.wait(1000);
@@ -28,13 +28,13 @@ describe('/login', () => {
         cy.get("input[name=username]").type('patrick', { delay: 100, timeout: 1000 });
         cy.get("input[name=password]").type('123456', { delay: 100, timeout: 1000});
         cy.get('form').submit();
-        cy.get('span').should('contain', 'User doesn\'t exist');
+        cy.get('span').should('contain', 'Invalid credentials');
     });
 
     it('should display an error when the password is invalid', () => {
         cy.get("input[name=username]").type('m4cht', { delay: 100, timeout: 1000 });
         cy.get("input[name=password]").type('123456', { delay: 100, timeout: 1000});
         cy.get('form').submit();
-        cy.get('span').should('contain', 'Invalid password');
+        cy.get('span').should('contain', 'Invalid credentials');
     });
 });

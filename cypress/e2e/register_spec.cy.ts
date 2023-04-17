@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-describe('template spec', () => {
+describe('register spec', () => {
     beforeEach(() => {
         cy.visit('/register');
         cy.wait(1000);

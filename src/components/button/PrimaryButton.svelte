@@ -2,6 +2,8 @@
 	export let type: 'submit' | 'button' = 'button';
 	export let css = '';
 	export let disabled = false;
+
+	export let id = '';
 </script>
 
 <button
@@ -9,6 +11,7 @@
 	on:click
 	{type}
 	{disabled}
+	{id}
 >
 	<slot />
 </button>
