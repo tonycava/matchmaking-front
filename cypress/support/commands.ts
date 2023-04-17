@@ -2,7 +2,7 @@
 Cypress.Commands.add("login", () => {
     cy.request({
         method: 'POST',
-        url: 'http://localhost:11002/auth/login',
+        url: 'http://localhost:8090/auth/login',
         body: {
             username: 'escaffre.lucas2003@gmail.com',
             password: 'Root1234!'
