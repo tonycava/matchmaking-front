@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Game, Move } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import { user } from '@stores/user.store';
 	import MoveToShow from '@components/MoveToShow.svelte';
 	import { page } from '$app/stores';
 	import socket from '$lib/webSocketClient';
+	import type { Game, Move } from 'matchmaking-shared';
 
 	export let game: Game;
 

@@ -9,7 +9,6 @@ const register: Action = async ({ request, cookies }) => {
 	const password = form.get(INPUT.PASSWORD) as string;
 
 	const response = await AuthService.register(username, password).catch((e) => {
-		console.log(e);
 		return { message: e.response?.data?.message || 'Internal server error' };
 	});
 	if ('message' in response) {

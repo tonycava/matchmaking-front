@@ -1,38 +1,133 @@
-# create-svelte
+# <h1 id="top">Running Matchmaking Frontend</h1>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This guide will help you set up, run, and build a Next.js app using the T3 stack. Follow the steps below to get started.
 
-## Creating a project
+## 📋 Prerequisites
 
-If you're seeing this, you've probably already done this step. Congrats!
+<hr>
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## <img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original-wordmark.svg" alt="git" width="30" height="30"/> Git
 
-# create a new project in my-app
-npm create svelte@latest my-app
+Git is a free and open source distributed version control system designed to handle everything from small to very large
+projects with speed and efficiency.
+
+```
+https://git-scm.com/downloads
 ```
 
-## Developing
+## <img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="30" height="30"/> NodeJS
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Node.js® is an open-source, cross-platform JavaScript runtime environment.
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```
+https://nodejs.org/en/download/
 ```
 
-## Building
+## <img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/yarn/yarn-original-wordmark.svg" alt="yarn" width="30" height="30"/> Yarn
 
-To create a production version of your app:
+Yarn is a package manager for your code. It allows you to use and share (e.g. JavaScript) code with other developers
+from around the world. Yarn does this quickly, securely, and reliably so you don’t ever have to worry.
 
-```bash
-npm run build
+```
+https://classic.yarnpkg.com/en/docs/install/
 ```
 
-You can preview the production build with `npm run preview`.
+## <img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="30" height="30"/> Docker
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Develop faster. Run anywhere.
+
+```
+https://www.docker.com/
+```
+
+## <img align="center" src="https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg"  alt="docker" width="30" height="30"/> Kubernetes (optional)
+
+Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of
+containerized applications.
+
+```
+https://kubernetes.io/docs/tasks/tools/
+```
+
+## 🚀 Getting Started
+
+<hr>
+
+## :pencil2: Step 1: Fill the env variable
+```bash
+ cp .env.example .env
+```
+
+## 📦 Step 2: Install Dependencies
+
+Install all the necessary dependencies for your project by running the following command:
+
+```bash
+yarn install
+```
+
+## 🚀 Step 3: Launch the Development Server
+
+Start the development server by executing the following command:
+
+```bash
+yarn run dev
+```
+
+## 🌐 Step 4: Access the App in Your Browser
+
+Open your browser and navigate to localhost:3000 to see your app in action.
+
+## 🏗 Step 5: Launch the App for Development 🐳
+
+To create a production-ready build of your app, run the following command:
+
+```bash
+docker-compose -f docker-compose.dev.yml up --build -d
+```
+
+## :sunglasses: Step 6: Launch the App for Production 🐳
+
+To create a production-ready build of your app, run the following command:
+
+```bash
+docker-compose -f docker-compose.prod.yml up --build -d
+```
+
+## 📝 Deploy to kubernetes
+
+<hr>
+
+## :pencil2: Step 1 : Create the `env.yml` file inse k8s folder and fill it with content of the `env.yml.example` file
+
+## :scroll: Step 2 : Create the configmap
+
+```bash
+kubectl -f k8s/env.yml create
+```
+
+## :outbox_tray: Step 3 : Create the app deployment
+
+```bash
+kubectl -f k8s/deployment.yml create
+```
+
+## :robot: Step 4 : Create the ingress
+
+```bash
+kubectl -f k8s/ingress.yml create
+```
+
+## :black_nib: Step 5 : If you are on linux modify your `/etc/hosts` file and add the following line
+
+```bash
+$(minikube ip) matchmaking-front.info
+```
+
+## :rocket: Step 6 : Access the app
+
+```bash
+http://matchmaking-front.info
+```
+
+[top](#top)

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Game } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import { goto } from '$app/navigation';
 	import { user } from '@stores/user.store';
+	import type { Game } from 'matchmaking-shared';
 
 	type Win = 'draw' | 'win' | 'lost';
 	export let game: Game;
@@ -40,7 +40,7 @@
 	const result = getWinningPlayer();
 </script>
 
-<div class="flex justify-center items-center h-full flex-col gap-24">
+<div class="flex justify-center items-center h-full flex-col gap-16">
 	<span class="text-secondary text-xl font-poppins-medium text-center"
 		>This game is now finished !</span
 	>
@@ -54,7 +54,9 @@
 		>
 	{/if}
 	<div class="flex flex-col gap-8 [&>button]:text-xl">
-		<PrimaryButton on:click={() => goto('/waiting')}>Go play another !</PrimaryButton>
-		<PrimaryButton on:click={() => goto('/')}>Go back to the home page !</PrimaryButton>
+		<PrimaryButton css="mx-auto" on:click={() => goto('/waiting')}>Go play another !</PrimaryButton>
+		<PrimaryButton css="mx-auto" on:click={() => goto('/')}
+			>Go back to the home page !</PrimaryButton
+		>
 	</div>
 </div>

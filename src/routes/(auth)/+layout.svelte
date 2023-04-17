@@ -5,7 +5,7 @@
 	import { INPUT } from '$lib/utils';
 	import type { FormActionResponse } from '@models/Error';
 
-	let isLoading = true;
+	let isLoading = false;
 	export let data;
 
 	const handleSubmit = (): FormActionResponse => {
@@ -30,18 +30,20 @@
 
 	<form
 		action={`?/${data.title.toLowerCase()}`}
-		class="bg-cover bg-[url('/3dcube.jpg')] text-secondary flex flex-col w-96 gap-4 pt-10 pb-6"
+		class="bg-cover bg-[url('/3dcube.jpg')] text-secondary flex flex-col gap-4 pt-10 pb-6 w-[90%] md:w-96"
 		enctype="multipart/form-data"
 		method="POST"
 		use:enhance={handleSubmit}
 	>
 		<InputFieldset
+			addClasses="!w-[90%] mx-auto"
 			placeholder="Username"
 			name={INPUT.USERNAME}
 			size={6}
 			src="/icons/IconUserSolid.svg"
 		/>
 		<InputFieldset
+			addClasses="!w-[90%] mx-auto"
 			type="password"
 			placeholder="Password"
 			name={INPUT.PASSWORD}

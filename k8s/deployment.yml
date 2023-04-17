@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: matchmaking-front-k8s
+spec:
+  selector:
+    app: matchmaking-front-k8s
+  ports:
+    - port: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matchmaking-front-k8s
+spec:
+  selector:
+    matchLabels:
+      app: matchmaking-front-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: matchmaking-front-k8s
+    spec:
+      containers:
+        - name: matchmaking-front-k8s
+          image: tonycava/matchmaking-front-k8s
+          envFrom:
+            - configMapRef:
+                name: matchmaking-front-config

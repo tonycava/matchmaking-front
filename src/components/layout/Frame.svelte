@@ -9,9 +9,9 @@
 </script>
 
 <div
-	class="fixed w-96 h-96 border border-secondary {bottom ? 'bottom-0' : ''} {right
+	class="md:fixed w-96 h-96 border border-secondary {css} {bottom ? 'bottom-0' : ''} {right
 		? 'right-0'
-		: ''} {left ? 'left-0' : ''} {top ? 'top-0' : ''} {css}"
+		: ''} {left ? 'left-0' : ''} {top ? 'top-0' : ''}"
 >
 	<ul
 		class="ti-anchor h-3/4 w-full overflow-y-auto flex flex-col {isReversed &&

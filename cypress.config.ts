@@ -1,9 +1,12 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
-  projectId: "9mzfyx",
-  responseTimeout: 120e3,
-  e2e: {
-    baseUrl: 'http://localhost:11001',
-  },
+	projectId: '9mzfyx',
+	responseTimeout: 120e3,
+	e2e: {
+		setupNodeEvents(on, config) {
+			// implement node event listeners here
+		},
+        baseUrl: 'http://localhost:11001',
+	}
 });

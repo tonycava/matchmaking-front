@@ -14,8 +14,15 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-import 'cypress-localstorage-commands'
+import './commands';
 
+export {}
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            login(): Chainable<void>;
+        }
+    }
+}
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
