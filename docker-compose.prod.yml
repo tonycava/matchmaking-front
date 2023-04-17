@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   app:
-    container_name: matchmaking_front
+    container_name: matchmaking-front
     build:
       context: ..
       dockerfile: Dockerfile.prod
