@@ -72,7 +72,7 @@
 
 <div class="flex gap-4 flex-col justify-center">
   <Frame css="block relative md:w-96 w-full m-2" bottom={true} right={true} isReversed={true}>
-    {#each chats as chat, i}
+    {#each chats as chat, i (chat.id)}
       <ChatCard isLast={i === chats.length - 1} {chat} {getMore} />
     {/each}
     <form
@@ -115,4 +115,4 @@
     <Svg className="mx-auto" src="/icons/IconBookSolid.svg" color="#ffeba7" size={16} />
     <span class="text-secondary text-lg font-poppins-medium">You actually have 1 chance out of 1000 to see this !</span>
   </div>
-{/if}
+{/if}966666
