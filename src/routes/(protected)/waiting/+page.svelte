@@ -17,7 +17,6 @@
 
 	socket.on(WEB_SOCKET_EVENT.PARTNER, async (data: GameInfo) => {
 		gameInfo.set(data);
-		localStorage.setItem('gameInfo', JSON.stringify(data));
 		await goto(`/game/${data.gameId}`);
 	});
 

@@ -23,10 +23,16 @@
 		players: $gameInfo.users
 	};
 
+	$: console.log($gameInfo);
+
 	onMount(() => {
-		const gameInfoStr = localStorage.getItem('gameInfo');
-		gameInfo.set(JSON.parse(gameInfoStr ?? '{}'));
 		socket.emit(WEB_SOCKET_EVENT.JOIN_GAME, $page.params.gameId);
+		const gameInfoStr = localStorage.getItem('gameInfo');
+		if (!gameInfoStr) {
+			localStorage.setItem('gameInfo', JSON.stringify($gameInfo));
+			return;
+    }
+		gameInfo.set(JSON.parse(gameInfoStr ?? '{}'));
 	});
 
 	socket.on(WEB_SOCKET_EVENT.UPDATE, (data: Game) => {
