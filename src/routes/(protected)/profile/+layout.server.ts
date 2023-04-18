@@ -1,7 +1,9 @@
 import type { LayoutServerLoad } from './$types';
-import { COOKEYS } from '$lib/utils';
 import UserService from '@services/user.service';
 import { redirect } from '@sveltejs/kit';
+import { COOKEYS } from '$lib/helpers/cookie.helper';
+
+export const ssr = false;
 
 export const load: LayoutServerLoad = async ({ cookies, locals, params }) => {
 	const jwtToken = cookies.get(COOKEYS.JWT_TOKEN) ?? '';

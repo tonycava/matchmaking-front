@@ -1,13 +1,13 @@
 <script lang="ts">
-	import socket from '$lib/webSocketClient';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import type { GameInfo } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import { user } from '@stores/user.store';
-	import { WEB_SOCKET_EVENT } from '$lib/utils';
 	import { gameInfo } from '@stores/gameInfo.store';
 	import Loading from '@components/common/Loading.svelte';
+	import socket from '$lib/socket';
+	import { WEB_SOCKET_EVENT } from 'matchmaking-shared';
 
 	onMount(() => {
 		window.addEventListener('beforeunload', () => {

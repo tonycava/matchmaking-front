@@ -1,7 +1,8 @@
 import type { Action, Actions } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
-import { COOKEYS, defaultCookiesOptions, INPUT } from '$lib/utils';
 import AuthService from '@services/auth.service';
+import { INPUT } from '$lib/helpers/form.helper';
+import { COOKEYS, defaultCookiesOptions } from '$lib/helpers/cookie.helper';
 
 const register: Action = async ({ request, cookies }) => {
 	const form = await request.formData();
