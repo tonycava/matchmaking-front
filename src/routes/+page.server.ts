@@ -1,9 +1,11 @@
 import type { PageServerLoad } from './$types';
-import { COOKEYS, INPUT, WEB_SOCKET_EVENT } from '$lib/utils';
 import { type Actions, redirect } from '@sveltejs/kit';
 import ChatService from '@services/chat.service';
 import LeaderboardService from '@services/leaderboard.service';
-import socket from '$lib/webSocketClient';
+import { INPUT } from '$lib/helpers/form.helper';
+import { COOKEYS } from '$lib/helpers/cookie.helper';
+import socket from '$lib/socket';
+import { WEB_SOCKET_EVENT } from 'matchmaking-shared';
 
 export const load: PageServerLoad = async ({ cookies, locals }) => {
 	if (!locals.user) throw redirect(303, '/login');

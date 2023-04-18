@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { user } from '@stores/user.store';
-	import MoveToShow from '@components/MoveToShow.svelte';
+	import MoveToShow from '@components/game/MoveToShow.svelte';
 	import type { Game } from 'matchmaking-shared';
 
 	export let game: Game;

@@ -1,6 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
-import { COOKEYS } from '$lib/utils';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
+import { COOKEYS } from '$lib/helpers/cookie.helper';
 
 export const handle: Handle = async ({ resolve, event }) => {
 	const jwtToken = event.cookies.get(COOKEYS.JWT_TOKEN);

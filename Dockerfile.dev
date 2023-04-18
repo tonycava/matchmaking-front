@@ -10,5 +10,5 @@ RUN sed -i -e 's/:..\/shared/:\/app\/shared/g' package.json
 RUN yarn install
 COPY ./frontend .
 
-
-CMD ["yarn", "dev", "--host"]
+ENTRYPOINT ["yarn"]
+CMD ["dev", "--host"]

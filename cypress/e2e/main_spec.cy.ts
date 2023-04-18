@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-describe('template spec', () => {
+describe('main spec', () => {
     beforeEach(() => {
-        cy.login()
-        cy.getCookie('jwt_token')
+        cy.register();
+        cy.getCookie('jwt_token');
         cy.visit('/');
     });
 
@@ -19,9 +19,22 @@ describe('template spec', () => {
         cy.get('button').should('contain', 'Logout');
     });
 
-    it('should have a link to the profile', () => {
-        cy.get('button').should('contain', 'Profile').click();
-        cy.url().should('include', '/profile');
+    it('should have a profile button', () => {
+        cy.get('button[id="profileButton"]').click().then(() => {
+            cy.visit('/profile');
+        });
     });
 
+    it('should send a message', () => {
+        cy.wait(1000);
+        cy.get('input[name=message]').type('Hello World', { delay: 100, timeout: 1000 });
+        cy.get("button[id='messageButton']").click();
+        cy.get('li').should('contain', 'Hello World');
+    });
+
+    it('should join the waiting room', () => {
+        cy.get("button[id='waitingButton']").click().then(() => {
+            cy.visit('/waiting');
+        });
+    });
 })
