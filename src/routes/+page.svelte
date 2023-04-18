@@ -1,11 +1,10 @@
 <script lang="ts">
-	import socket from '$lib/webSocketClient';
+	import socket from '$lib/socket';
 	import { user } from '@stores/user.store';
 	import Cookies from 'js-cookie';
-	import { COOKEYS, disconnect, getWinRateRation, INPUT, WEB_SOCKET_EVENT } from '$lib/utils';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import { goto } from '$app/navigation';
-	import ChatCard from '@components/ChatCard.svelte';
+	import ChatCard from '@components/common/Card/ChatCard.svelte';
 	import ChatService from '@services/chat.service';
 	import Frame from '@components/layout/Frame.svelte';
 	import InputFieldset from '@components/form/InputFieldset.svelte';
@@ -14,6 +13,11 @@
 	import Svg from '@components/layout/Svg.svelte';
 	import type { PageServerData } from './$types';
 	import type { Chat, Range } from 'matchmaking-shared';
+	import LeaderBoardCard from '@components/common/Card/LeaderBoardCard.svelte';
+	import { WEB_SOCKET_EVENT } from 'matchmaking-shared';
+	import { COOKEYS } from '$lib/helpers/cookie.helper';
+	import { disconnect } from '$lib/helpers/auth.helper';
+	import { INPUT } from '$lib/helpers/form.helper';
 
 	let message = '';
 	let chats: Chat[] = [];
@@ -35,7 +39,7 @@
 		chats = [chat, ...chats];
 	});
 
-	const getMore = async () => {
+	const getMoreChat = async () => {
 		if (!haveMoreChat) return;
 		range = { start: range.end, end: range.end + RATIO };
 
@@ -58,22 +62,20 @@
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 gap-8 text-2xl">
   <span class="flex-1">Welcome to ALM-Matcher {$user?.username}</span>
-  <PrimaryButton css="h-fit" id="profileButton" on:click={() => goto('/profile')}>
+  <PrimaryButton css="h-fit" on:click={() => goto('/profile')}>
     <Svg size={6} src="/icons/IconUserSolid.svg" />
   </PrimaryButton>
   <PrimaryButton css="h-fit" on:click={disconnect}>Logout</PrimaryButton>
 </div>
 
-<div
-  class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center"
->
-  <PrimaryButton id='waitingButton' on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
+<div class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center">
+  <PrimaryButton on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
 </div>
 
 <div class="flex gap-4 flex-col justify-center">
   <Frame css="block relative md:w-96 w-full m-2" bottom={true} right={true} isReversed={true}>
-    {#each chats as chat, i}
-      <ChatCard isLast={i === chats.length - 1} {chat} {getMore} />
+    {#each chats as chat, i (chat.id)}
+      <ChatCard isLast={i === chats.length - 1} {chat} {getMoreChat} />
     {/each}
     <form
       method="POST"
@@ -89,23 +91,14 @@
           bind:value={message}
           src="/icons/IconMessageSolid.svg"
         />
-        <PrimaryButton type="submit" id="messageButton">Send message</PrimaryButton>
+        <PrimaryButton type="submit">Send message</PrimaryButton>
       </div>
     </form>
   </Frame>
 
   <Frame css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
     {#each data.leaderboard as leaderboardUser, i}
-      <div
-        class="font-poppins-medium relative mx-auto text-sm w-11/12 mt-4 bg-secondary p-2 rounded"
-      >
-        <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} |
-        Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRateRation(
-        leaderboardUser.numberOfWins,
-        leaderboardUser.numberOfLosses
-      )}
-        <span class="absolute right-2">#{i + 1}</span>
-      </div>
+      <LeaderBoardCard {leaderboardUser} position={i + 1} />
     {/each}
   </Frame>
 </div>

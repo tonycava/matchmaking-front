@@ -4,3 +4,28 @@ export type User = {
 	createdAt: Date;
 	profilePicture?: string;
 };
+
+export type Follow = {
+	id: string
+	followerId: string;
+	followedId: string;
+}
+
+export type Game = {
+	id: string;
+	createdAt: Date;
+	loserId: string;
+	winnerId: string;
+	result: string;
+}
+
+export type UserInformation = User & {
+	numberOfWins: number;
+	numberOfLoses: number,
+	followersCount: number;
+	followedCount: number;
+	isAccountPrivate: boolean;
+	followers: Follow[];
+	followed: Follow[];
+	games: Game[];
+};

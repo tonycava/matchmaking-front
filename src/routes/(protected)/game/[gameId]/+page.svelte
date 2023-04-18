@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import socket from '$lib/webSocketClient';
 	import { onMount } from 'svelte';
 	import Choosing from './Choosing.svelte';
 	import Reveal from './Reveal.svelte';
 	import Finish from './Finish.svelte';
-	import Score from '@components/Score.svelte';
+	import Score from '@components/game/Score.svelte';
 	import { gameInfo } from '@stores/gameInfo.store';
 	import type { Game } from 'matchmaking-shared';
 	import { WEB_SOCKET_EVENT } from 'matchmaking-shared';
+	import socket from '$lib/socket';
 
 	let game: Game = {
 		state: 'choosing',
@@ -22,8 +22,6 @@
 		timerRev: 5,
 		players: $gameInfo.users
 	};
-
-	$: console.log($gameInfo);
 
 	onMount(() => {
 		socket.emit(WEB_SOCKET_EVENT.JOIN_GAME, $page.params.gameId);

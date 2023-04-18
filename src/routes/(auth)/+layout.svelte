@@ -2,8 +2,8 @@
 	import { applyAction, enhance } from '$app/forms';
 	import Loading from '@components/common/Loading.svelte';
 	import InputFieldset from '@components/form/InputFieldset.svelte';
-	import { INPUT } from '$lib/utils';
 	import type { FormActionResponse } from '@models/Error';
+	import { INPUT } from '$lib/helpers/form.helper';
 
 	let isLoading = false;
 	export let data;
