@@ -11,4 +11,21 @@ export type Follow = {
 	followedId: string;
 }
 
-export type UserInformation = User & { numberOfWins: number; numberOfLoses: number, followersCount: number; followedCount: number; followers: Follow[]; followed: Follow[]; };
+export type Game = {
+	id: string;
+	createdAt: Date;
+	loserId: string;
+	winnerId: string;
+	result: string;
+}
+
+export type UserInformation = User & {
+	numberOfWins: number;
+	numberOfLoses: number,
+	followersCount: number;
+	followedCount: number;
+	isAccountPrivate: boolean;
+	followers: Follow[];
+	followed: Follow[];
+	games: Game[];
+};
