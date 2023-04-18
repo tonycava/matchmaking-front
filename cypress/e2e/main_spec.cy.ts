@@ -2,8 +2,8 @@
 
 describe('main spec', () => {
     beforeEach(() => {
-        cy.register()
-        cy.getCookie('jwt_token')
+        cy.register();
+        cy.getCookie('jwt_token');
         cy.visit('/');
     });
 

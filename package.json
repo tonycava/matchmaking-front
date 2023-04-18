@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "vite dev",
+    "test": "ENVIRONMENT='test' vite dev",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run --record --key a6ffaa32-4148-4c16-9b03-015e9f82b5d1"
+    "cy:open": "ENVIRONMENT='test' cypress open",
+    "cy:run": "ENVIRONMENT='test' cypress run"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",
