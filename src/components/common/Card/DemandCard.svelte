@@ -1,14 +1,9 @@
 <script lang="ts">
 	import type { User } from '@models/User';
-	import UserService from '@services/user.service';
-	import Cookies from 'js-cookie';
-	import { COOKEYS } from '$lib/helpers/cookie.helper';
-
 	export let demand: { id: string, userToFollow: User };
-	let nodeRef: HTMLDivElement;
 </script>
 
-<div bind:this={nodeRef} class="w-[95%] flex items-center border-secondary border-2 rounded p-2">
+<div class="w-[95%] flex items-center border-secondary border-2 rounded p-2">
   <img src={demand.userToFollow.profilePicture
 		? `data:image/png;base64,${demand.userToFollow.profilePicture}`
 		: '/default.png'} alt="user icon" />

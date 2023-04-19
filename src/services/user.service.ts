@@ -1,7 +1,7 @@
 import axios, { type AxiosResponse } from 'axios';
 import type { AMLResponse } from '@models/Chat';
 import { getBaseURL } from '$lib/utils';
-import type { Application, Follow, UserInformation } from '@models/User';
+import type { UserInformation } from '@models/User';
 import type { Chat } from 'matchmaking-shared';
 
 const getUser = (
