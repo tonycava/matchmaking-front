@@ -1,8 +1,11 @@
+import type { Role } from 'matchmaking-shared';
+
 export type User = {
 	id: string;
 	username: string;
 	createdAt: Date;
 	profilePicture?: string;
+	role: Role,
 };
 
 export type Follow = {
@@ -26,15 +29,26 @@ export type Game = {
 	result: string;
 }
 
+export type UserDemand = {
+	id: string,
+	createdAt: Date,
+	username: string,
+	profilePicture: string,
+}
+
 export type UserInformation = User & {
 	numberOfWins: number;
 	numberOfLoses: number,
+	role: Role;
 	followersCount: number;
 	followedCount: number;
 	isAccountPrivate: boolean;
 	followers: Follow[];
 	followed: Follow[];
-	whoFollow: { id: string, userToFollow: User }[]
+	whoFollow: {
+		id: string,
+		userToFollow: UserDemand,
+	}[]
 	haveAccess: number;
 	isAlreadyApplicating: boolean,
 	games: Game[];

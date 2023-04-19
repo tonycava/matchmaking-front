@@ -13,13 +13,14 @@
 	import Cookies from 'js-cookie';
 	import { disconnect } from '$lib/helpers/auth.helper';
 	import socket from '$lib/socket';
-	import type { Follow, Game } from '@models/User';
+	import type { Follow, Game, UserDemand } from '@models/User';
 	import SidebarButton from '@components/button/SidebarButton.svelte';
 	import WinListOptionSidebar from './WinListOptionSidebar.svelte';
 	import AddedUsersOptionSidebar from './AddedUsersOptionSidebar.svelte';
 	import SettingsOptionSidebar from './SettingsOptionSidebar.svelte';
 	import PrivateModal from '@components/common/PrivateModal.svelte';
 	import SocialService from '@services/social.service';
+	import { goto } from '$app/navigation';
 
 	export let data: LayoutServerData;
 	const isMyProfilePage = $page.url.pathname === '/profile' || $page.params?.userId === $user?.id;
@@ -31,8 +32,34 @@
 	let text = data.user.followers.find(follower => follower.followedId === $user?.id) ? 'Unfollow' : 'Follow';
 	if (data.user.isAlreadyApplicating) text = 'Waiting';
 
-	socket.on(`user/new-follow/${$user?.id}`, (follower: Follow) => {
+	socket.on(`user/demand/${data.user.id}`, (demand: { id: string; userToFollow: UserDemand }) => {
+		data.user.whoFollow = [...data.user.whoFollow, demand];
+	});
+
+	socket.on(`user/demand/accept/${data.user.id}/${$user?.id}`, () => {
+		text = 'Unfollow';
+		haveAccessToThis = true;
+	});
+
+	socket.on(`user/demand/accept/${data.user.id}/${$user?.id}`, () => {
+		text = 'Unfollow';
+		haveAccessToThis = true;
+	});
+
+	socket.on(`user/demand/reject/${data.user.id}/${$user?.id}`, () => {
+		text = 'Follow';
+	});
+
+	socket.on(`user/demand/remove/${data.user.id}`, (demandId: string) => {
+		data.user.whoFollow = data.user.whoFollow.filter(demand => demand.id !== demandId);
+	});
+
+	socket.on(`user/new-follow/${data.user.id}`, (follower: Follow) => {
 		data.user.followers = [...data.user.followers, follower];
+	});
+
+	socket.on(`user/remove-follow/${data.user.id}`, (followerId: string) => {
+		data.user.followers = data.user.followers.filter(f => f.followedId !== followerId);
 	});
 
 	socket.on(`user/${data.user.id}`, (newGame: Game) => {
@@ -40,8 +67,9 @@
 		data.user.games = [newGame, ...data.user.games];
 	});
 
-	const followOrUnfollow = async (type: string) => {
+	const followOrUnfollow = async (event) => {
 		const jwtToken = Cookies.get(COOKEYS.JWT_TOKEN) ?? '';
+		const type = event.srcElement.innerHTML.toLowerCase();
 
 		if (type === 'waiting') {
 			await SocialService.removeWaitingApplication(jwtToken, $page.params.userId);
@@ -51,14 +79,14 @@
 
 		if (type === 'follow' && data.user.isAccountPrivate) {
 			const response = await SocialService.addApplication(jwtToken, $page.params.userId)
-				.catch(() => Promise.resolve(undefined));
+				.catch(() => Promise.resolve(''));
 			if (!response) await disconnect();
 			text = 'Waiting';
 			return;
 		}
 
 		const response = await SocialService[`${type}User`](jwtToken, $page.params.userId)
-			.catch(() => Promise.resolve(undefined));
+			.catch(() => Promise.resolve(''));
 
 		if (!response) await disconnect();
 
@@ -91,10 +119,18 @@
       <EditableProfilePicture needToSowEdit={isMyProfilePage} userData={data.user} />
     </div>
     <div class="absolute left-1/2 -translate-x-1/2">
-      <h2 class="text-secondary mt-4 text-2xl font-poppins-medium">{data.user.username}</h2>
-      {#if !isMyProfilePage}
-        <PrimaryButton on:click={(e) => followOrUnfollow(e.srcElement.innerHTML.toLowerCase())} css="mt-4">{text}</PrimaryButton>
+      <h2 class="text-secondary mt-4 text-center text-2xl font-poppins-medium">{data.user.username}</h2>
+      {#if data.user.role === 'ADMIN'}
+        <h2 class="text-secondary text-center text-sm font-poppins-medium underline mt-2">Administrator</h2>
       {/if}
+      <div class="flex gap-2">
+        {#if !isMyProfilePage}
+          <PrimaryButton on:click={followOrUnfollow} css="mt-4">{text}</PrimaryButton>
+        {/if}
+        {#if !isMyProfilePage && haveAccessToThis}
+          <PrimaryButton on:click={() => goto(`/direct/${data.user.id}`)} css="mt-4">Message</PrimaryButton>
+        {/if}
+      </div>
     </div>
   </div>
   <div class="flex ml-20 w-full justify-between">

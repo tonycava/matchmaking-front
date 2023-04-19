@@ -22,7 +22,7 @@
 			: 'ml-2 bg-[#84743e]'} {addClasses}"
   >
     <div class="flex justify-between">
-      <a href={`/profile/${chat.userId}`} class="text-sm font-poppins-regular hover:underline">{chat.user.username} : <br /></a>
+      <a href={`/profile/${chat.userId}`} class="text-sm font-poppins-regular hover:underline {chat.user.role === 'ADMIN' && 'text-red-600'}">{chat.user.username} : <br /></a>
       <span class="text-sm font-poppins-regular">{since}</span>
     </div>
     <p class="font-poppins-medium pt-2">{chat.content}</p>
@@ -32,7 +32,7 @@
     class="break-words rounded bg-secondary text-black p-1 w-[calc(50%-.75rem)] mt-2 mr-2 ml-auto {addClasses}"
   >
     <div class="flex justify-between">
-      <a href={`/profile/${chat.userId}`} class="text-sm font-poppins-regular hover:underline">{chat.user.username} : <br /></a>
+      <a href={`/profile/${chat.userId}`} class="text-sm font-poppins-regular hover:underline {chat.user.role === 'ADMIN' && 'text-red-600'}">{chat.user.username} : <br /></a>
       <span class="text-sm font-poppins-regular">{since}</span>
     </div>
     <p class="font-poppins-medium pt-2">{chat.content}</p>
@@ -42,7 +42,7 @@
     class="break-words rounded bg-[#84743e] text-black p-1 w-[calc(50%-.75rem)] mt-2 ml-2 {addClasses}"
   >
     <div class="flex justify-between">
-      <a href={`/profile/${chat.userId}`} class="text-sm font-poppins-regular hover:underline">{chat.user.username} : <br /></a>
+      <a href={`/profile/${chat.userId}`} class="text-sm font-poppins-regular hover:underline {chat.user.role === 'ADMIN' && 'text-red-600'}">{chat.user.username} : <br /></a>
       <span class="text-sm font-poppins-regular">{since}</span>
     </div>
     <p class="font-poppins-medium pt-2">{chat.content}</p>
