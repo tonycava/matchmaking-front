@@ -1,7 +1,11 @@
 /// <reference types="cypress" />
 describe('main spec', () => {
-    beforeEach(() => {
+    before(() => {
         cy.register();
+    });
+
+    beforeEach(() => {
+        cy.login();
         cy.getCookie('jwt_token');
         cy.visit('/');
     });
