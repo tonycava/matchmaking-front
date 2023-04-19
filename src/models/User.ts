@@ -11,6 +11,13 @@ export type Follow = {
 	followedId: string;
 }
 
+export type Application = {
+	id: string
+	createdAt: Date
+	userIdToFollow: string
+	userIdWhoFollow: string
+}
+
 export type Game = {
 	id: string;
 	createdAt: Date;
@@ -27,5 +34,8 @@ export type UserInformation = User & {
 	isAccountPrivate: boolean;
 	followers: Follow[];
 	followed: Follow[];
+	whoFollow: { id: string, userToFollow: User }[]
+	haveAccess: number;
+	isAlreadyApplicating: boolean,
 	games: Game[];
 };

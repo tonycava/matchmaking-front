@@ -15,6 +15,7 @@
 	};
 
 	export let userData: UserInformation;
+	export let needToSowEdit: boolean;
 </script>
 
 <img
@@ -24,7 +25,7 @@
 		: '/default.png'}
   alt="user icon"
 />
-{#if userData.id === $user?.id && userData.id === ($page.params.userId ?? $user?.id)}
+{#if needToSowEdit}
   <form
     bind:this={form}
     use:enhance={handleFileUpload}

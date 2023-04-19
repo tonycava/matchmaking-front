@@ -1,7 +1,7 @@
 import axios, { type AxiosResponse } from 'axios';
 import type { AMLResponse } from '@models/Chat';
 import { getBaseURL } from '$lib/utils';
-import type { Follow, UserInformation } from '@models/User';
+import type { Application, Follow, UserInformation } from '@models/User';
 import type { Chat } from 'matchmaking-shared';
 
 const getUser = (
@@ -38,20 +38,12 @@ const uploadProfilePicture = (
 		}
 	);
 };
-
-const unfollowUser = (token: string, userIdToUnFollow: string): Promise<AxiosResponse<AMLResponse<{
-	follow: Follow
-}>>> => {
-	return axios.post(`${getBaseURL()}/social/remove-follow`, { userIdToUnFollow }, { headers: { Authorization: token } });
-};
-
-const followUser = (token: string, userIdToFollow: string) => {
-	return axios.post(`${getBaseURL()}/social/add-follow`, { userIdToFollow }, { headers: { Authorization: token } });
+const changeStatus = (token: string, status: boolean): Promise<AxiosResponse<AMLResponse<{ status: boolean }>>> => {
+	return axios.patch(`${getBaseURL()}/user/update-status`, { status }, { headers: { Authorization: token } });
 };
 
 export default {
 	getUser,
 	uploadProfilePicture,
-	unfollowUser,
-	followUser
+	changeStatus,
 };
