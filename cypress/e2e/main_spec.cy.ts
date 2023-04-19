@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 describe('main spec', () => {
     beforeEach(() => {
         cy.register();
