@@ -21,6 +21,7 @@ Cypress.Commands.add("register", () => {
 });
 
 Cypress.Commands.add("login", () => {
+    cy.log(`cookie : ${cy.getCookie('jwt_token')}`);
     cy.request({
         method: 'POST',
         url: 'http://localhost:8090/auth/login',
@@ -30,7 +31,7 @@ Cypress.Commands.add("login", () => {
         },
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${Cypress.env('jwt_token')}`
+            'Authorization': `${cy.getCookie('jwt_token')}`
         }
     }).then((response) => {
         cy.setCookie('jwt_token', JSON.stringify(response.body.data.token));
