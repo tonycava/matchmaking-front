@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { user } from '@stores/user.store.js';
-	import { page } from '$app/stores';
 	import Svg from '@components/layout/Svg.svelte';
 	import type { FormActionResponse } from '@models/Error.js';
 	import { applyAction, enhance } from '$app/forms';
