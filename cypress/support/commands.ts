@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 Cypress.Commands.add("register", () => {
     const sharedSecret = Cypress.env('test');
+    cy.log(sharedSecret);
+    console.log(sharedSecret);
     if (sharedSecret) {
         cy.request({
             method: 'DELETE',
