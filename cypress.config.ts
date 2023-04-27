@@ -8,6 +8,6 @@ export default defineConfig({
 				process.env.NODE_ENV === 'test';
 			return config;
 		},
-        baseUrl: 'http://localhost:11001', //8089 or 11001
+        baseUrl: 'http://localhost:8089', //8089 or 11001
 	}
 });
