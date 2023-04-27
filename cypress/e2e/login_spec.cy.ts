@@ -15,7 +15,7 @@ describe('login spec', () => {
 
 	it('should display an error message when the form is submitted with invalid credentials', () => {
 		cy.get('form').submit();
-		cy.get('span').should('contain', 'Username is required');
+		cy.get('span').should('contain', 'Username is required', { timeout: 1000 });
 	});
 
 	it('should display an error message when the password is not submitted', () => {

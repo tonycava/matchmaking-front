@@ -25,8 +25,7 @@
 	<span
 		class="relative flex justify-center items-end text-2xl font-poppins-bolds text-center text-secondary
     before:-bottom-3 before:absolute before:content-[''] before:w-32 before:h-1 before:bg-secondary"
-		>{data.title}</span
-	>
+		>{data.title}</span>
 
 	<form
 		action={`?/${data.title.toLowerCase()}`}

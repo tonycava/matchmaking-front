@@ -8,10 +8,10 @@
 
 <button
 	class="bg-secondary rounded p-3 w-fit text-primary text-sm font-bold {css}"
+	{id}
 	on:click
 	{type}
 	{disabled}
-	{id}
 >
 	<slot />
 </button>

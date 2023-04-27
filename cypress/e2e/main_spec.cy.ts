@@ -1,8 +1,5 @@
 /// <reference types="cypress" />
 describe('main spec', () => {
-    before(() => {
-        cy.register();
-    });
 
     beforeEach(() => {
         cy.login();
