@@ -19,21 +19,21 @@ describe('login spec', () => {
 	});
 
 	it('should display an error message when the password is not submitted', () => {
-		cy.get('input[name=username]').type('m4cht');
+		cy.get("input[name=username]").type('m4cht');
 		cy.get('form').submit();
 		cy.get('span').should('contain', 'Password is required');
 	});
 
-	it("should display an error when the user doesn't exist", () => {
-		cy.get('input[name=username]').type('patrick', { delay: 100, timeout: 1000 });
-		cy.get('input[name=password]').type('123456', { delay: 100, timeout: 1000 });
+	it('should display an error when the user doesn\'t exist', () => {
+		cy.get("input[name=username]").type('patrick', { delay: 100, timeout: 1000 });
+		cy.get("input[name=password]").type('123456', { delay: 100, timeout: 1000});
 		cy.get('form').submit();
 		cy.get('span').should('contain', 'Invalid credentials');
 	});
 
 	it('should display an error when the password is invalid', () => {
-		cy.get('input[name=username]').type('m4cht', { delay: 100, timeout: 1000 });
-		cy.get('input[name=password]').type('123456', { delay: 100, timeout: 1000 });
+		cy.get("input[name=username]").type('m4cht', { delay: 100, timeout: 1000 });
+		cy.get("input[name=password]").type('123456', { delay: 100, timeout: 1000});
 		cy.get('form').submit();
 		cy.get('span').should('contain', 'Invalid credentials');
 	});

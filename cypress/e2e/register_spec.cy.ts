@@ -9,7 +9,7 @@ describe('register spec', () => {
 		cy.get('span').should('contain', 'Register');
 	});
 
-	it('should links to the login', () => {
+	it('should links to the login',() => {
 		cy.contains('Login !').should('have.attr', 'href', '/login');
 	});
 
@@ -19,8 +19,8 @@ describe('register spec', () => {
 	});
 
 	it('should display an error message when the password is not submitted', () => {
-		cy.get('input[name=username]').type('m4cht');
+		cy.get("input[name=username]").type('m4cht');
 		cy.get('form').submit();
 		cy.get('span').should('contain', 'Password is required');
 	});
-});
+})
