@@ -54,6 +54,7 @@ https://kubernetes.io/docs/tasks/tools/
 <hr>
 
 ## :pencil2: Step 1: Fill the env variable
+
 ```bash
  cp .env.example .env
 ```

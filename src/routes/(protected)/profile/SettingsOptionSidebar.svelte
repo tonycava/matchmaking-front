@@ -9,12 +9,12 @@
 	import { COOKEYS } from '$lib/helpers/cookie.helper';
 	import { disconnect } from '$lib/helpers/auth.helper';
 
-	export let data: { user: UserInformation, chats: Chat[] };
+	export let data: { user: UserInformation; chats: Chat[] };
 	export let isSideBarOpen: boolean;
 
 	let showConfirmModal = false;
 	let checked = data.user.isAccountPrivate;
-	const handleChange = async (e) => {
+	const handleChange = async (e: any) => {
 		const value: 'Cancel' | 'Approved' = e.target.textContent;
 		if (value === 'Cancel') {
 			showConfirmModal = false;
@@ -36,13 +36,17 @@
 </script>
 
 {#if showConfirmModal}
-  <ConfirmModal
-    on:click={handleChange}
-    tittle="Confirm"
-    description="When your account is private, only those whom you approve can see your content, your current followers will not be affected."
-  />
+	<ConfirmModal
+		on:click={handleChange}
+		tittle="Confirm"
+		description="When your account is private, only those whom you approve can see your content, your current followers will not be affected."
+	/>
 {/if}
 
 <Sidebar bind:isSideBarOpen>
-  <InputCheckbox bind:checked on:change={() => showConfirmModal = true} className="mx-auto mt-10" />
+	<InputCheckbox
+		bind:checked
+		on:change={() => (showConfirmModal = true)}
+		className="mx-auto mt-10"
+	/>
 </Sidebar>

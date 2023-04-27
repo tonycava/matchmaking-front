@@ -8,8 +8,11 @@
 		: 'relative'}"
 >
 	<div
-		class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-2 ease-in animate-scaleZeroToOne"></div>
-	<div class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-2 ease-in animate-dotFadeOut"></div>
-	<div class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-8 ease-in animate-dotFadeOut"></div>
-	<div class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-14 ease-in animate-scaleOneToZero"></div>
+		class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-2 ease-in animate-scaleZeroToOne"
+	/>
+	<div class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-2 ease-in animate-dotFadeOut" />
+	<div class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-8 ease-in animate-dotFadeOut" />
+	<div
+		class="absolute w-3 h-3 rounded-[50%] bg-white top-8 left-14 ease-in animate-scaleOneToZero"
+	/>
 </div>

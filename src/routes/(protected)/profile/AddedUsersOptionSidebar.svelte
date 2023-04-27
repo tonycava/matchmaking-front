@@ -8,9 +8,9 @@
 	import { disconnect } from '$lib/helpers/auth.helper';
 	import SocialService from '@services/social.service';
 
-	export let data: { user: UserInformation, chats: Chat[] };
+	export let data: { user: UserInformation; chats: Chat[] };
 	export let isSideBarOpen: boolean;
-	const onChoose = async (e, idx) => {
+	const onChoose = async (e: any, idx: number) => {
 		const jwtToken = Cookies.get(COOKEYS.JWT_TOKEN) ?? '';
 		const demand = data.user.whoFollow[idx];
 
@@ -29,17 +29,19 @@
 </script>
 
 <Sidebar bind:isSideBarOpen>
-  {#if data.user.isAccountPrivate}
-    {#if data.user.whoFollow.length > 0}
-      <div class="w-full flex justify-center mt-10">
-        {#each data.user.whoFollow as demand, i (demand.id)}
-          <DemandCard on:click={(e) => onChoose(e, i)} {demand} />
-        {/each}
-      </div>
-    {:else}
-      <h2 class="text-center text-2xl mt-10 text-secondary">You don't have any demand !</h2>
-    {/if}
-  {:else}
-    <h2 class="text-center text-2xl mt-10 text-secondary">You need to be in private to see your demand !</h2>
-  {/if}
+	{#if data.user.isAccountPrivate}
+		{#if data.user.whoFollow.length > 0}
+			<div class="w-full flex justify-center mt-10">
+				{#each data.user.whoFollow as demand, i (demand.id)}
+					<DemandCard on:click={(e) => onChoose(e, i)} {demand} />
+				{/each}
+			</div>
+		{:else}
+			<h2 class="text-center text-2xl mt-10 text-secondary">You don't have any demand !</h2>
+		{/if}
+	{:else}
+		<h2 class="text-center text-2xl mt-10 text-secondary">
+			You need to be in private to see your demand !
+		</h2>
+	{/if}
 </Sidebar>

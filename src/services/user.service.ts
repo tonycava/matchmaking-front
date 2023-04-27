@@ -10,7 +10,7 @@ const getUser = (
 ): Promise<
 	AxiosResponse<
 		AMLResponse<{
-			user: UserInformation
+			user: UserInformation;
 			chats: Chat[];
 		}>
 	>
@@ -38,12 +38,19 @@ const uploadProfilePicture = (
 		}
 	);
 };
-const changeStatus = (token: string, status: boolean): Promise<AxiosResponse<AMLResponse<{ status: boolean }>>> => {
-	return axios.patch(`${getBaseURL()}/user/update-status`, { status }, { headers: { Authorization: token } });
+const changeStatus = (
+	token: string,
+	status: boolean
+): Promise<AxiosResponse<AMLResponse<{ status: boolean }>>> => {
+	return axios.patch(
+		`${getBaseURL()}/user/update-status`,
+		{ status },
+		{ headers: { Authorization: token } }
+	);
 };
 
 export default {
 	getUser,
 	uploadProfilePicture,
-	changeStatus,
+	changeStatus
 };

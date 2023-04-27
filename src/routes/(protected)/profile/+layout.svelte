@@ -29,7 +29,9 @@
 	let isWinListSidebarOpen = false;
 	let isAddedUserSidebarOpen = false;
 	let isSettingsOpen = false;
-	let text = data.user.followers.find(follower => follower.followedId === $user?.id) ? 'Unfollow' : 'Follow';
+	let text = data.user.followers.find((follower) => follower.followedId === $user?.id)
+		? 'Unfollow'
+		: 'Follow';
 	if (data.user.isAlreadyApplicating) text = 'Waiting';
 
 	socket.on(`user/demand/${data.user.id}`, (demand: { id: string; userToFollow: UserDemand }) => {
@@ -51,7 +53,7 @@
 	});
 
 	socket.on(`user/demand/remove/${data.user.id}`, (demandId: string) => {
-		data.user.whoFollow = data.user.whoFollow.filter(demand => demand.id !== demandId);
+		data.user.whoFollow = data.user.whoFollow.filter((demand) => demand.id !== demandId);
 	});
 
 	socket.on(`user/new-follow/${data.user.id}`, (follower: Follow) => {
@@ -59,7 +61,7 @@
 	});
 
 	socket.on(`user/remove-follow/${data.user.id}`, (followerId: string) => {
-		data.user.followers = data.user.followers.filter(f => f.followedId !== followerId);
+		data.user.followers = data.user.followers.filter((f) => f.followedId !== followerId);
 	});
 
 	socket.on(`user/${data.user.id}`, (newGame: Game) => {
@@ -67,9 +69,9 @@
 		data.user.games = [newGame, ...data.user.games];
 	});
 
-	const followOrUnfollow = async (event) => {
+	const followOrUnfollow = async (event: any) => {
 		const jwtToken = Cookies.get(COOKEYS.JWT_TOKEN) ?? '';
-		const type = event.srcElement.innerHTML.toLowerCase();
+		const type: 'waiting' | 'follow' | 'unfollow' = event.srcElement.innerHTML.toLowerCase();
 
 		if (type === 'waiting') {
 			await SocialService.removeWaitingApplication(jwtToken, $page.params.userId);
@@ -78,21 +80,36 @@
 		}
 
 		if (type === 'follow' && data.user.isAccountPrivate) {
-			const response = await SocialService.addApplication(jwtToken, $page.params.userId)
-				.catch(() => Promise.resolve(''));
+			const response = await SocialService.addApplication(jwtToken, $page.params.userId).catch(() =>
+				Promise.resolve('')
+			);
 			if (!response) await disconnect();
 			text = 'Waiting';
 			return;
 		}
 
-		const response = await SocialService[`${type}User`](jwtToken, $page.params.userId)
-			.catch(() => Promise.resolve(''));
+		let response;
 
-		if (!response) await disconnect();
+		if (type === 'follow')
+			response = await SocialService.followUser(jwtToken, $page.params.userId).catch(() =>
+				Promise.resolve('')
+			);
+		else
+			response = await SocialService.unfollowUser(jwtToken, $page.params.userId).catch(() =>
+				Promise.resolve('')
+			);
 
-		data.user.followers = type === 'follow' ?
-			[...data.user.followers, response.data.data[type]] :
-			data.user.followers.filter(follower => follower.followedId !== $user?.id);
+		if (typeof response === 'string') {
+			await disconnect();
+			return;
+		}
+
+		data.user.followers =
+			type === 'follow'
+				? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				  // @ts-ignore
+				  [...data.user.followers, response.data.data[type]]
+				: data.user.followers.filter((follower) => follower.followedId !== $user?.id);
 
 		text = type === 'follow' && data.user.isAccountPrivate ? 'Waiting' : 'Follow';
 		if (data.user.isAccountPrivate) haveAccessToThis = false;
@@ -102,75 +119,96 @@
 <GoBack href="/" size={10} className="absolute m-6" />
 
 {#if isWinListSidebarOpen}
-  <WinListOptionSidebar {data} bind:isSideBarOpen={isWinListSidebarOpen} />
+	<WinListOptionSidebar {data} bind:isSideBarOpen={isWinListSidebarOpen} />
 {/if}
 
 {#if isAddedUserSidebarOpen}
-  <AddedUsersOptionSidebar {data} bind:isSideBarOpen={isAddedUserSidebarOpen} />
+	<AddedUsersOptionSidebar {data} bind:isSideBarOpen={isAddedUserSidebarOpen} />
 {/if}
 
 {#if isSettingsOpen}
-  <SettingsOptionSidebar {data} bind:isSideBarOpen={isSettingsOpen} />
+	<SettingsOptionSidebar {data} bind:isSideBarOpen={isSettingsOpen} />
 {/if}
 
 <div class="flex m-8 ml-24 mt-16 relative">
-  <div class="relative">
-    <div class="min-w-max">
-      <EditableProfilePicture needToSowEdit={isMyProfilePage} userData={data.user} />
-    </div>
-    <div class="absolute left-1/2 -translate-x-1/2">
-      <h2 class="text-secondary mt-4 text-center text-2xl font-poppins-medium">{data.user.username}</h2>
-      {#if data.user.role === 'ADMIN'}
-        <h2 class="text-secondary text-center text-sm font-poppins-medium underline mt-2">Administrator</h2>
-      {/if}
-      <div class="flex gap-2">
-        {#if !isMyProfilePage}
-          <PrimaryButton on:click={followOrUnfollow} css="mt-4">{text}</PrimaryButton>
-        {/if}
-        {#if !isMyProfilePage && haveAccessToThis}
-          <PrimaryButton on:click={() => goto(`/direct/${data.user.id}`)} css="mt-4">Message</PrimaryButton>
-        {/if}
-      </div>
-    </div>
-  </div>
-  <div class="flex ml-20 w-full justify-between">
-    {#if haveAccessToThis}
-      <InformationGroup informations={[
-        `Number of wins :&nbsp<b>${data.user.numberOfWins}</b>`,
-        `Number of looses :&nbsp<b>${data.user.numberOfLoses}</b>`,
-        `Win Rate Ratio :&nbsp<b>${getWinRateRation(data.user.numberOfWins, data.user.numberOfLoses)}</b>`,
-        ]} />
-    {/if}
-    <InformationGroup informations={[
-        `Created :&nbsp<b>${formatDate(new Date(data.user.createdAt))}</b>`,
-        `Number of follower :&nbsp<b>${data.user.followers.length}</b>`,
-        `Number of following :&nbsp<b>${data.user.followedCount}`,
-        ]} />
-  </div>
+	<div class="relative">
+		<div class="min-w-max">
+			<EditableProfilePicture needToSowEdit={isMyProfilePage} userData={data.user} />
+		</div>
+		<div class="absolute left-1/2 -translate-x-1/2">
+			<h2 class="text-secondary mt-4 text-center text-2xl font-poppins-medium">
+				{data.user.username}
+			</h2>
+			{#if data.user.role === 'ADMIN'}
+				<h2 class="text-secondary text-center text-sm font-poppins-medium underline mt-2">
+					Administrator
+				</h2>
+			{/if}
+			<div class="flex gap-2">
+				{#if !isMyProfilePage}
+					<PrimaryButton on:click={followOrUnfollow} css="mt-4">{text}</PrimaryButton>
+				{/if}
+				{#if !isMyProfilePage && haveAccessToThis}
+					<PrimaryButton on:click={() => goto(`/direct/${data.user.id}`)} css="mt-4"
+						>Message</PrimaryButton
+					>
+				{/if}
+			</div>
+		</div>
+	</div>
+	<div class="flex ml-20 w-full justify-between">
+		{#if haveAccessToThis}
+			<InformationGroup
+				informations={[
+					`Number of wins :&nbsp<b>${data.user.numberOfWins}</b>`,
+					`Number of looses :&nbsp<b>${data.user.numberOfLoses}</b>`,
+					`Win Rate Ratio :&nbsp<b>${getWinRateRation(
+						data.user.numberOfWins,
+						data.user.numberOfLoses
+					)}</b>`
+				]}
+			/>
+		{/if}
+		<InformationGroup
+			informations={[
+				`Created :&nbsp<b>${formatDate(new Date(data.user.createdAt))}</b>`,
+				`Number of follower :&nbsp<b>${data.user.followers.length}</b>`,
+				`Number of following :&nbsp<b>${data.user.followedCount}`
+			]}
+		/>
+	</div>
 
-  {#if haveAccessToThis}
-    <SidebarButton bind:toggle={isWinListSidebarOpen} iconSrc="/icons/IconGamePadSolid.svg" />
-  {/if}
-  {#if isMyProfilePage}
-    <SidebarButton className="-bottom-48" bind:toggle={isAddedUserSidebarOpen} iconSrc="/icons/IconUsersSolid.svg" />
-    <SidebarButton className="-bottom-72" bind:toggle={isSettingsOpen} iconSrc="/icons/IconGearSolid.svg" />
-  {/if}
+	{#if haveAccessToThis}
+		<SidebarButton bind:toggle={isWinListSidebarOpen} iconSrc="/icons/IconGamePadSolid.svg" />
+	{/if}
+	{#if isMyProfilePage}
+		<SidebarButton
+			className="-bottom-48"
+			bind:toggle={isAddedUserSidebarOpen}
+			iconSrc="/icons/IconUsersSolid.svg"
+		/>
+		<SidebarButton
+			className="-bottom-72"
+			bind:toggle={isSettingsOpen}
+			iconSrc="/icons/IconGearSolid.svg"
+		/>
+	{/if}
 </div>
 
 {#if !haveAccessToThis && data.user.isAccountPrivate}
-  <PrivateModal />
+	<PrivateModal />
 {/if}
 
 {#if haveAccessToThis}
-  <Frame ulCss="h-full lg:m-0" bottom={true} left={true}>
-    {#if data.chats.length > 0}
-      {#each data.chats as chat}
-        <ChatCard addClasses="!w-[95%] mx-auto" {chat} isLast={false} getMore={() => undefined} />
-      {/each}
-    {:else}
-      <span class="m-auto text-2xl text-secondary">No chats !</span>
-    {/if}
-  </Frame>
+	<Frame ulCss="h-full lg:m-0" bottom={true} left={true}>
+		{#if data.chats.length > 0}
+			{#each data.chats as chat}
+				<ChatCard addClasses="!w-[95%] mx-auto" {chat} isLast={false} />
+			{/each}
+		{:else}
+			<span class="m-auto text-2xl text-secondary">No chats !</span>
+		{/if}
+	</Frame>
 {/if}
 
 <slot />

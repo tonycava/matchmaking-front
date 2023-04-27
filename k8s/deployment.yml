@@ -26,6 +26,7 @@ spec:
       containers:
         - name: matchmaking-front-k8s
           image: tonycava/matchmaking-front-k8s
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: matchmaking-front-config

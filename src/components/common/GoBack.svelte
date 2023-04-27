@@ -7,5 +7,5 @@
 </script>
 
 <a {href} class={className}>
-  <Svg src="/icons/IconArrowLeftSolid.svg" {size} color="#ffeba7" />
+	<Svg src="/icons/IconArrowLeftSolid.svg" {size} color="#ffeba7" />
 </a>

@@ -5,5 +5,5 @@
 </script>
 
 <div class="bg-secondary text-primary p-2 rounded {className}">
-  {text}
+	{text}
 </div>

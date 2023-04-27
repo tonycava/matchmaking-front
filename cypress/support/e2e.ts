@@ -16,14 +16,14 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 
-export {}
+export {};
 declare global {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace Cypress {
-        interface Chainable {
-            register(): Chainable<void>;
-        }
-    }
+	// eslint-disable-next-line @typescript-eslint/no-namespace
+	namespace Cypress {
+		interface Chainable {
+			register(): Chainable<void>;
+		}
+	}
 }
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

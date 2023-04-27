@@ -11,13 +11,17 @@ export enum INPUT {
 }
 
 export const uploadProfilePictureHelper = async ({
-	request, cookies, locals, params
-}: RequestEvent): Promise<{ type: 'fail' | 'redirect'; status: number; message: string; }> => {
+	request,
+	cookies,
+	locals,
+	params
+}: RequestEvent): Promise<{ type: 'fail' | 'redirect'; status: number; message: string }> => {
 	const form = await request.formData();
 	const profilePicture = form.get(INPUT.PROFILE_PICTURE) as File;
 	const jwtToken = cookies.get(COOKEYS.JWT_TOKEN) ?? '';
 
-	if (!profilePicture.size) return { status: 400, type: 'fail', message: 'No profile picture provided' };
+	if (!profilePicture.size)
+		return { status: 400, type: 'fail', message: 'No profile picture provided' };
 
 	const logoBuffer = await profilePicture.arrayBuffer();
 	const logoBase64 = Buffer.from(logoBuffer).toString('base64');
@@ -33,7 +37,7 @@ export const uploadProfilePictureHelper = async ({
 		return {
 			type: 'redirect',
 			status: 303,
-			message: "/login"
+			message: '/login'
 		};
 	}
 
