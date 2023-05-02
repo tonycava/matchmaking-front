@@ -1,7 +1,5 @@
 <script lang="ts">
 	import Svg from '@components/layout/Svg.svelte';
-	import { expoOut } from 'svelte/easing';
-
 	export let src = '';
 	export let size = 4;
 	export let value = '';
