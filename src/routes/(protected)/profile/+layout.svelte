@@ -2,7 +2,7 @@
 	import type { LayoutServerData } from './$types';
 	import Frame from '@components/layout/Frame.svelte';
 	import ChatCard from '@components/common/Card/ChatCard.svelte';
-	import { formatDate, getWinRateRation } from '$lib/utils';
+	import { getWinRateRation } from '$lib/utils';
 	import GoBack from '@components/common/GoBack.svelte';
 	import EditableProfilePicture from '@components/layout/EditableProfilePicture.svelte';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
@@ -21,6 +21,7 @@
 	import PrivateModal from '@components/common/PrivateModal.svelte';
 	import SocialService from '@services/social.service';
 	import { goto } from '$app/navigation';
+	import { getRelativeTime } from '$lib/date.utils';
 
 	export let data: LayoutServerData;
 	const isMyProfilePage = $page.url.pathname === '/profile' || $page.params?.userId === $user?.id;
@@ -111,7 +112,7 @@
 				  [...data.user.followers, response.data.data[type]]
 				: data.user.followers.filter((follower) => follower.followedId !== $user?.id);
 
-		text = type === 'follow' && data.user.isAccountPrivate ? 'Waiting' : 'Follow';
+		text = type === 'follow' && data.user.isAccountPrivate ? 'Waiting' : type === 'follow' ? 'Unfollow' : 'Follow';
 		if (data.user.isAccountPrivate) haveAccessToThis = false;
 	};
 </script>
@@ -171,7 +172,7 @@
 		{/if}
 		<InformationGroup
 			informations={[
-				`Created :&nbsp<b>${formatDate(new Date(data.user.createdAt))}</b>`,
+				`Created :&nbsp<b>${getRelativeTime(new Date(data.user.createdAt))}</b>`,
 				`Number of follower :&nbsp<b>${data.user.followers.length}</b>`,
 				`Number of following :&nbsp<b>${data.user.followedCount}`
 			]}

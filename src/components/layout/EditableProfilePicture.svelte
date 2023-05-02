@@ -31,11 +31,11 @@
 		method="POST"
 		enctype="multipart/form-data"
 	>
-		<label for="file-upload" class="absolute top-0 -right-3 bg-secondary p-3 rounded-full">
+		<label for="file-upload" class="absolute top-0 -right-3 bg-secondary p-3 rounded-full cursor-pointer">
 			<Svg src="/icons/IconPenSolid.svg" size={6} />
 		</label>
 		<input
-			accept="image/*"
+			accept="image/jpeg,image/png"
 			on:change={() => form.submit()}
 			id="file-upload"
 			name={INPUT.PROFILE_PICTURE}

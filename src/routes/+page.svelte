@@ -63,14 +63,12 @@
 <div class="text-secondary flex justify-between font-poppins-medium m-4 gap-8 text-2xl">
 	<span class="flex-1">Welcome to ALM-Matcher {$user?.username}</span>
 	<PrimaryButton id="profileButton" css="h-fit" on:click={() => goto('/profile')}>
-		<Svg size={6} src="/icons/IconUserSolid.svg" />
+		<Svg size={5} src="/icons/IconUserSolid.svg" />
 	</PrimaryButton>
 	<PrimaryButton css="h-fit" on:click={disconnect}>Logout</PrimaryButton>
 </div>
 
-<div
-	class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center"
->
+<div class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center">
 	<PrimaryButton id="waitingButton" on:click={() => goto('/waiting')}>Join the waiting room</PrimaryButton>
 </div>
 
@@ -87,6 +85,8 @@
 			<div class="flex w-full gap-2">
 				<InputFieldset
 					placeholder="Message"
+					autocomplete="off"
+					autofocus
 					addClasses="w-[calc(100%-9rem)]"
 					name={INPUT.MESSAGE}
 					size={8}

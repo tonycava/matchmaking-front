@@ -4,8 +4,6 @@ import { DateTime } from 'luxon';
 
 export const getBaseURL = () => (browser ? env.PUBLIC_EXTERNAL_API_URL : env.PUBLIC_API_URL);
 
-export const formatDate = (date: Date) => DateTime.fromJSDate(date).toRelative();
-
 export const getWinRateRation = (numberOfWins: number, numberOfLosses: number) => {
 	if (numberOfWins === 0 && numberOfLosses === 0) return 'No game !';
 

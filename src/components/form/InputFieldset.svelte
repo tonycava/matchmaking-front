@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Svg from '@components/layout/Svg.svelte';
+	import { expoOut } from 'svelte/easing';
 
 	export let src = '';
 	export let size = 4;
@@ -8,6 +9,8 @@
 	export let type: 'text' | 'password' = 'text';
 	export let placeholder = '';
 
+	export let autocomplete: 'on' | 'off' = 'on';
+	export let autofocus = false;
 	export let addClasses = '';
 
 	const typeAction = (node: HTMLInputElement) => {
@@ -28,7 +31,8 @@
 	<input
 		class="bg-primary w-full text-secondary placeholder-gray-500 outline-0 h-10 p-1 rounded text-sm"
 		{placeholder}
-		autocomplete="on"
+		{autofocus}
+		{autocomplete}
 		bind:value
 		{name}
 		use:typeAction
