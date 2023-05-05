@@ -4,10 +4,9 @@ export default defineConfig({
 	responseTimeout: 120e3,
 	e2e: {
 		setupNodeEvents(on, config) {
-			config.env.test =
-				process.env.NODE_ENV === 'test';
+			config.env.test = process.env.NODE_ENV === 'test';
 			return config;
 		},
-        baseUrl: 'http://localhost:8089', //8089 or 11001
+		baseUrl: 'http://localhost:8089' //8089 or 11001
 	}
 });

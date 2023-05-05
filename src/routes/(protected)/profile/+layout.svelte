@@ -22,6 +22,7 @@
 	import SocialService from '@services/social.service';
 	import { goto } from '$app/navigation';
 	import { getRelativeTime } from '$lib/date.utils';
+	import Svg from '@components/layout/Svg.svelte';
 
 	export let data: LayoutServerData;
 	const isMyProfilePage = $page.url.pathname === '/profile' || $page.params?.userId === $user?.id;
@@ -107,12 +108,15 @@
 
 		data.user.followers =
 			type === 'follow'
-				? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				  // @ts-ignore
-				  [...data.user.followers, response.data.data[type]]
+				? [...data.user.followers, response.data.data[type as keyof typeof response.data.data]]
 				: data.user.followers.filter((follower) => follower.followedId !== $user?.id);
 
-		text = type === 'follow' && data.user.isAccountPrivate ? 'Waiting' : type === 'follow' ? 'Unfollow' : 'Follow';
+		text =
+			type === 'follow' && data.user.isAccountPrivate
+				? 'Waiting'
+				: type === 'follow'
+				? 'Unfollow'
+				: 'Follow';
 		if (data.user.isAccountPrivate) haveAccessToThis = false;
 	};
 </script>
@@ -150,9 +154,9 @@
 					<PrimaryButton on:click={followOrUnfollow} css="mt-4">{text}</PrimaryButton>
 				{/if}
 				{#if !isMyProfilePage && haveAccessToThis}
-					<PrimaryButton on:click={() => goto(`/direct/${data.user.id}`)} css="mt-4"
-						>Message</PrimaryButton
-					>
+					<PrimaryButton on:click={() => goto(`/direct/${data.user.id}`)} css="mt-4">
+						<Svg src="/icons/IconMessageSolid.svg" size={5} className="my-auto" />
+					</PrimaryButton>
 				{/if}
 			</div>
 		</div>

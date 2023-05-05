@@ -16,7 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 
-export {}
+export {};
 declare global {
 	// eslint-disable-next-line @typescript-eslint/no-namespace
 	namespace Cypress {

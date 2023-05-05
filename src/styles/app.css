@@ -4,12 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-	.gradiant-block {
-		background: linear-gradient(180deg, #46d0eb 0%, #6dfca1 100%);
-	}
-}
-
 @layer base {
 	html {
 		background-color: #1f2029;
