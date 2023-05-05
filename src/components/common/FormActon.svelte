@@ -2,8 +2,6 @@
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import InputFieldset from '@components/form/InputFieldset.svelte';
 	import { enhance } from '$app/forms';
-	import exp from 'constants';
-
 	export let handleSubmit: () => void;
 	export let value: string;
 	export let name: string;
