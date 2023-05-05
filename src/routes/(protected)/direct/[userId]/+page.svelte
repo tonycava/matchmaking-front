@@ -21,7 +21,7 @@
 
 	socket.emit('joinDirect', { to: $user?.id, from: $page.params.userId });
 
-	socket.on('newDirect', (newDirect: Direct) => {
+	socket.on('newDirect', async (newDirect: Direct) => {
 		if (
 			!(
 				newDirect.personWhoSendId === $page.params.userId ||
@@ -30,15 +30,15 @@
 		)
 			return;
 		data.data.directs = [newDirect, ...data.data.directs];
+		if (
+			!data.conversations.find((conversation) => conversation.person.id === $page.params.userId)
+		)
+			await invalidateAll();
 	});
 
 	const handleSubmit = (): FormActionResponse => {
 		return async ({ result }) => {
 			await applyAction(result);
-			if (
-				!data.conversations.find((conversation) => conversation.person.id === $page.params.userId)
-			)
-				await invalidateAll();
 			message = '';
 		};
 	};
