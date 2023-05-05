@@ -14,8 +14,8 @@
 			? profilePicture
 			: `data:image/png;base64,${profilePicture}`}
 		class="h-full p-2 rounded-full"
-		alt="profile picture image"
-	/>
+		alt="profile picture image of {name}"
+	>
 	<div class="justify-center flex-col flex">
 		<span class="text-xl text-secondary font-poppins-medium">{name}</span>
 		<span class="text-sm text-secondary font-poppins-medium">{lastMessage}</span>

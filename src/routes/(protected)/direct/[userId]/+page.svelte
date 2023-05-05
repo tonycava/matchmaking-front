@@ -11,11 +11,11 @@
 	import type { Direct } from 'matchmaking-shared';
 	import { page } from '$app/stores';
 	import { invalidateAll } from '$app/navigation';
+	import type { DirectOpponentUser } from '@models/User';
 
 	let message = '';
 	export let data: PageServerParentData & PageServerData;
 
-	type DirectOpponentUser = { username: string; profilePicture: string };
 	let directOpponentUser: DirectOpponentUser;
 	$: directOpponentUser = data.data[$page.params.userId] as DirectOpponentUser;
 
@@ -51,7 +51,7 @@
 				? `data:image/png;base64,${directOpponentUser?.profilePicture}`
 				: '/default.png'}
 			class="w-[4%] rounded-full"
-			alt="profile picture image"
+			alt="profile picture image of the user {directOpponentUser?.username}"
 		/>
 		<div class="justify-center flex-col flex">
 			<span class="text-xl text-secondary font-poppins-medium">{directOpponentUser?.username}</span>

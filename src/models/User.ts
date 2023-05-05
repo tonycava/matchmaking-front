@@ -8,6 +8,8 @@ export type User = {
 	role: Role;
 };
 
+export type DirectOpponentUser = { username: string; profilePicture: string };
+
 export type Follow = {
 	id: string;
 	followerId: string;

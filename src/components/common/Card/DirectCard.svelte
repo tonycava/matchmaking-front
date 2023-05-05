@@ -2,10 +2,12 @@
 	import type { Direct } from 'matchmaking-shared';
 	import { getRelativeTime } from '$lib/date.utils';
 	import { user } from '@stores/user.store';
+	import type { DirectOpponentUser } from '@models/User';
 
 	export let direct: Direct;
 
-	export let directOpponentUser: any;
+
+	export let directOpponentUser: DirectOpponentUser;
 	export let addClasses = '';
 </script>
 

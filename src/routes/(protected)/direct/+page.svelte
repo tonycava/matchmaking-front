@@ -1,7 +1,5 @@
 <script lang="ts">
 	import Svg from '@components/layout/Svg.svelte';
-
-	let text = 'Hello World';
 </script>
 
 <div class="flex justify-center text-secondary items-center h-full flex-col gap-4">

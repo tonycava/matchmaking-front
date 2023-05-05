@@ -2,6 +2,7 @@ import axios, { type AxiosResponse } from 'axios';
 import { getBaseURL } from '$lib/utils';
 import type { AMLResponse } from '@models/Chat';
 import type { Direct } from 'matchmaking-shared';
+import type { DirectOpponentUser } from '@models/User';
 
 const getDirectsChats = async (
 	jwtToken: string,
@@ -12,7 +13,7 @@ const getDirectsChats = async (
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			directs: Direct[];
-			[key: string]: { username: string; profilePicture: string };
+			[key: string]: DirectOpponentUser
 		}>
 	>
 > => {
