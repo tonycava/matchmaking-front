@@ -19,7 +19,7 @@
 				>
 			{/each}
 		{:else}
-			<span class="text-2xl text-secondary flex justify-center mt-24">No parties play !</span>
+			<span class="text-2xl text-primary flex justify-center mt-24">No parties play !</span>
 		{/if}
 	</div>
 </Sidebar>
