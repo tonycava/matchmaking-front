@@ -25,7 +25,7 @@
 			<a
 				href={`/profile/${chat.userId}`}
 				class="text-sm font-poppins-regular hover:underline {chat.user.role === 'ADMIN' &&
-					'text-red-600'}">{chat.user.username} : <br /></a
+					'text-red-700'}">{chat.user.username} : <br /></a
 			>
 			<span class="text-sm font-poppins-regular">{since}</span>
 		</div>
@@ -39,7 +39,7 @@
 			<a
 				href={`/profile/${chat.userId}`}
 				class="text-sm font-poppins-regular hover:underline {chat.user.role === 'ADMIN' &&
-					'text-red-600'}">{chat.user.username} : <br /></a
+					'text-red-700'}">{chat.user.username} : <br /></a
 			>
 			<span class="text-sm font-poppins-regular">{since}</span>
 		</div>
@@ -53,7 +53,7 @@
 			<a
 				href={`/profile/${chat.userId}`}
 				class="text-sm font-poppins-regular hover:underline {chat.user.role === 'ADMIN' &&
-					'text-red-600'}">{chat.user.username} : <br /></a
+					'text-red-700'}">{chat.user.username} : <br /></a
 			>
 			<span class="text-sm font-poppins-regular">{since}</span>
 		</div>

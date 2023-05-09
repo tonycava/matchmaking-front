@@ -3,6 +3,7 @@
 	export let css = '';
 	export let disabled = false;
 
+	export let ariaLabel = '';
 	export let id = '';
 </script>
 
@@ -11,6 +12,7 @@
 	{id}
 	on:click
 	{type}
+	aria-label={ariaLabel}
 	{disabled}
 >
 	<slot />

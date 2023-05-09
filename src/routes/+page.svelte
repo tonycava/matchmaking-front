@@ -62,51 +62,56 @@
 </script>
 
 <div class="text-secondary flex justify-between font-poppins-medium m-4 gap-8 text-2xl">
-	<span class="flex-1">Welcome to ALM-Matcher {$user?.username}</span>
-	<PrimaryButton css="h-fit" on:click={() => goto('/direct')}>
-		<Svg size={5} src="/icons/IconPaperPlaneSolid.svg" />
-	</PrimaryButton>
-	<PrimaryButton id="profileButton" css="h-fit" on:click={() => goto('/profile')}>
-		<Svg size={5} src="/icons/IconUserSolid.svg" />
-	</PrimaryButton>
-	<PrimaryButton css="h-fit" on:click={disconnect}>Logout</PrimaryButton>
+  <span class="flex-1">Welcome to ALM-Matcher {$user?.username}</span>
+  <PrimaryButton ariaLabel="go to direct page" css="h-fit" on:click={() => goto('/direct')}>
+    <Svg size={5} src="/icons/IconPaperPlaneSolid.svg" />
+  </PrimaryButton>
+  <PrimaryButton ariaLabel="go to profile page" id="profileButton" css="h-fit" on:click={() => goto('/profile')}>
+    <Svg size={5} src="/icons/IconUserSolid.svg" />
+  </PrimaryButton>
+  <PrimaryButton css="h-fit" on:click={disconnect}>Logout</PrimaryButton>
 </div>
 
 <div
-	class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center"
+  class="flex flex-1 h-screen justify-center items-start mt-10 [&>button]:text-3xl xl:items-center"
 >
-	<PrimaryButton id="waitingButton" on:click={() => goto('/waiting')}
-		>Join the waiting room</PrimaryButton
-	>
+  <PrimaryButton id="waitingButton" on:click={() => goto('/waiting')}
+  >Join the waiting room
+  </PrimaryButton
+  >
 </div>
 
 <div class="flex gap-4 flex-col justify-center">
-	<Frame css="block relative md:w-96 w-full m-2" bottom={true} right={true} isReversed={true}>
-		{#each data.chats as chat, i (chat.id)}
-			<ChatCard isLast={i === data.chats.length - 1} {chat} {getMoreChat} />
-		{/each}
-		<FormActon name={INPUT.MESSAGE} bind:value={message} handleSubmit={handleSendMessage} />
-	</Frame>
+  <Frame css="block relative md:w-96 w-full m-2" bottom={true} right={true} isReversed={true}>
+    {#each data.chats as chat, i (chat.id)}
+      <ChatCard isLast={i === data.chats.length - 1} {chat} {getMoreChat} />
+    {/each}
+    <FormActon name={INPUT.MESSAGE} bind:value={message} handleSubmit={handleSendMessage} />
+  </Frame>
 
-	<Frame ulCss="h-full" css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
-		{#each data.leaderboard as leaderboardUser, i}
-			<SimpleCard>
-				<b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} |
-				Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRateRation(
-					leaderboardUser.numberOfWins,
-					leaderboardUser.numberOfLosses
-				)}
-				<span class="absolute right-2">#{i + 1}</span>
-			</SimpleCard>
-		{/each}
-	</Frame>
+  <Frame ulCss="h-full" css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
+    <ul>
+      {#each data.leaderboard as leaderboardUser, i}
+        <SimpleCard>
+          <li>
+            <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} |
+            Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRateRation(
+            leaderboardUser.numberOfWins,
+            leaderboardUser.numberOfLosses
+          )}
+            <span class="absolute right-2">#{i + 1}</span>
+          </li>
+        </SimpleCard>
+      {/each}
+    </ul>
+  </Frame>
 </div>
 
 {#if randomNumber === MEL_NUMBER}
-	<div class="fixed top-1/2 -translate-y-3/4 right-0 m-4 rotate-3 flex flex-col gap-2">
-		<Svg className="mx-auto" src="/icons/IconBookSolid.svg" color="#ffeba7" size={16} />
-		<span class="text-secondary text-lg font-poppins-medium"
-			>You actually have 1 chance out of 1000 to see this !</span
-		>
-	</div>
+  <div class="fixed top-1/2 -translate-y-3/4 right-0 m-4 rotate-3 flex flex-col gap-2">
+    <Svg className="mx-auto" src="/icons/IconBookSolid.svg" color="#ffeba7" size={16} />
+    <span class="text-secondary text-lg font-poppins-medium"
+    >You actually have 1 chance out of 1000 to see this !</span
+    >
+  </div>
 {/if}
