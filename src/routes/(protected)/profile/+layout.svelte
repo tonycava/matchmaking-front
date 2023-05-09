@@ -135,6 +135,10 @@
 	<SettingsOptionSidebar {data} bind:isSideBarOpen={isSettingsOpen} />
 {/if}
 
+{#if !haveAccessToThis && data.user.isAccountPrivate}
+	<PrivateModal />
+{/if}
+
 <div class="flex m-8 ml-24 mt-16 relative">
 	<div class="relative">
 		<div class="min-w-max">
@@ -199,10 +203,6 @@
 		/>
 	{/if}
 </div>
-
-{#if !haveAccessToThis && data.user.isAccountPrivate}
-	<PrivateModal />
-{/if}
 
 {#if haveAccessToThis}
 	<Frame ulCss="h-full lg:m-0" bottom={true} left={true}>
