@@ -30,10 +30,7 @@
 		)
 			return;
 		data.data.directs = [newDirect, ...data.data.directs];
-		if (
-			!data.conversations.find((conversation) => conversation.person.id === $page.params.userId)
-		)
-			await invalidateAll();
+		await invalidateAll();
 	});
 
 	const handleSubmit = (): FormActionResponse => {
@@ -45,24 +42,24 @@
 </script>
 
 <DirectFrame>
-	<div on:click class="flex mx-auto justify-center items-center h-full gap-2">
-		<img
-			src={directOpponentUser?.profilePicture
+  <div on:click class="flex mx-auto justify-center items-center h-full gap-2">
+    <img
+      src={directOpponentUser?.profilePicture
 				? `data:image/png;base64,${directOpponentUser?.profilePicture}`
 				: '/default.png'}
-			class="w-[4%] rounded-full"
-			alt="profile picture image of the user {directOpponentUser?.username}"
-		/>
-		<div class="justify-center flex-col flex">
-			<span class="text-xl text-secondary font-poppins-medium">{directOpponentUser?.username}</span>
-		</div>
-	</div>
+      class="w-[4%] rounded-full"
+      alt="profile picture image of the user {directOpponentUser?.username}"
+    />
+    <div class="justify-center flex-col flex">
+      <span class="text-xl text-secondary font-poppins-medium">{directOpponentUser?.username}</span>
+    </div>
+  </div>
 </DirectFrame>
 
 <ul class="ti-anchor h-[80%] w-full overflow-y-auto flex flex-col flex-col-reverse">
-	{#each data.data.directs as direct}
-		<DirectCard {direct} {directOpponentUser} />
-	{/each}
+  {#each data.data.directs as direct}
+    <DirectCard {direct} {directOpponentUser} />
+  {/each}
 </ul>
 
 <FormActon name={INPUT.MESSAGE} bind:value={message} {handleSubmit} />

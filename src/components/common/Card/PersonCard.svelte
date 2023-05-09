@@ -2,6 +2,7 @@
 	export let name: string;
 
 	export let profilePicture: string;
+
 	export let lastMessage: string;
 </script>
 
@@ -10,9 +11,7 @@
 	class="border-2 border-secondary cursor-pointer flex h-24 border rounded w-11/12 mx-auto"
 >
 	<img
-		src={profilePicture === '/default.png'
-			? profilePicture
-			: `data:image/png;base64,${profilePicture}`}
+		src={profilePicture}
 		class="h-full p-2 rounded-full"
 		alt="profile picture image of {name}"
 	>

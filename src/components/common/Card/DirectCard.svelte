@@ -6,7 +6,6 @@
 
 	export let direct: Direct;
 
-
 	export let directOpponentUser: DirectOpponentUser;
 	export let addClasses = '';
 </script>

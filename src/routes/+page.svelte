@@ -88,7 +88,7 @@
 		<FormActon name={INPUT.MESSAGE} bind:value={message} handleSubmit={handleSendMessage} />
 	</Frame>
 
-	<Frame css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
+	<Frame ulCss="h-full" css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
 		{#each data.leaderboard as leaderboardUser, i}
 			<SimpleCard>
 				<b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} |

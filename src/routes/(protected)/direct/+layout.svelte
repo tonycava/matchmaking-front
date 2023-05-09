@@ -15,9 +15,7 @@
 	<div class="w-10/12 mx-auto h-full border-2 flex border-secondary rounded">
 		<div class="w-[30%] h-full gap-2 flex flex-col border-r-secondary border-r-2">
 			<DirectFrame>
-				<span class="text-secondary text-2xl text-center flex justify-center items-center h-full"
-					>{$user?.username}</span
-				>
+				<span class="text-secondary text-2xl text-center flex justify-center items-center h-full">{$user?.username}</span>
 			</DirectFrame>
 			{#each data.conversations as conversation}
 				<PersonCard
@@ -25,7 +23,7 @@
 					name={conversation.person.username}
 					lastMessage={conversation.lastMessage}
 					profilePicture={conversation.person.profilePicture
-						? conversation.person.profilePicture
+						? `data:image/png;base64,${conversation.person.profilePicture}`
 						: '/default.png'}
 				/>
 			{/each}
