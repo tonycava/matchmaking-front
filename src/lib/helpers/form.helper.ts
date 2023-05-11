@@ -7,7 +7,8 @@ export enum INPUT {
 	PASSWORD = 'password',
 	MESSAGE = 'message',
 
-	PROFILE_PICTURE = 'profilePicture'
+	PROFILE_PICTURE = 'profilePicture',
+	CODE = "code"
 }
 
 export const uploadProfilePictureHelper = async ({
@@ -34,6 +35,8 @@ export const uploadProfilePictureHelper = async ({
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
+		cookies.delete(COOKEYS.OTP_AUTHENTICATED);
+		cookies.delete(COOKEYS.KEY);
 		return {
 			type: 'redirect',
 			status: 303,

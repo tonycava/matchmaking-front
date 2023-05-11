@@ -87,20 +87,20 @@
       <ChatCard isLast={i === data.chats.length - 1} {chat} {getMoreChat} />
     {/each}
     <li>
-      <FormActon name={INPUT.MESSAGE} bind:value={message} handleSubmit={handleSendMessage} />
+      <FormActon addClasses="w-full absolute bottom-0" placeholder="Message" textButton="Send message" name={INPUT.MESSAGE} bind:value={message} handleSubmit={handleSendMessage} />
     </li>
   </Frame>
 
   <Frame ulCss="h-full" css="block relative md:w-96 w-full m-2" bottom={true} left={true}>
     {#each data.leaderboard as leaderboardUser, i}
-        <SimpleCard>
-          <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} |
-          Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRateRation(
-          leaderboardUser.numberOfWins,
-          leaderboardUser.numberOfLosses
-        )}
-          <span class="absolute right-2">#{i + 1}</span>
-        </SimpleCard>
+      <SimpleCard>
+        <b class="font-bold">{leaderboardUser.username}</b> | Win : {leaderboardUser.numberOfWins} |
+        Loose : {leaderboardUser.numberOfLosses} | WRR : {getWinRateRation(
+        leaderboardUser.numberOfWins,
+        leaderboardUser.numberOfLosses
+      )}
+        <span class="absolute right-2">#{i + 1}</span>
+      </SimpleCard>
     {/each}
   </Frame>
 </div>

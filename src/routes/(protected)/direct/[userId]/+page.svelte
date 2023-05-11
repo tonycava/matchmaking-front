@@ -62,4 +62,4 @@
   {/each}
 </ul>
 
-<FormActon name={INPUT.MESSAGE} bind:value={message} {handleSubmit} />
+<FormActon textButton="Send message" addClasses="w-full absolute bottom-0" placeholder="Message" name={INPUT.MESSAGE} bind:value={message} {handleSubmit} />

@@ -8,8 +8,7 @@ import socket from '$lib/socket';
 import { WEB_SOCKET_EVENT } from 'matchmaking-shared';
 
 export const load: PageServerLoad = async ({ cookies, locals }) => {
-	if (!locals.user) throw redirect(303, '/login');
-
+	if (!locals.user || !locals.otpAuthenticated) throw redirect(303, '/login');
 	const token = cookies.get(COOKEYS.JWT_TOKEN) ?? '';
 
 	const responseChats = await ChatService.getChats(token, { start: 0, end: 11 }).catch(

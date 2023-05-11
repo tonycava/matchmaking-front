@@ -12,8 +12,9 @@ export const handle: Handle = async ({ resolve, event }) => {
 		id: payload.id,
 		username: payload.username,
 		createdAt: payload.createdAt,
-		role: payload.role
+		role: payload.role,
+		secret: payload.secret
 	};
-
+	event.locals.otpAuthenticated = event.cookies.get(COOKEYS.OTP_AUTHENTICATED) === '1';
 	return resolve(event);
 };

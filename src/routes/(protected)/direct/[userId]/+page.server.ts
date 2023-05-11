@@ -18,6 +18,8 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
+		cookies.delete(COOKEYS.OTP_AUTHENTICATED);
+		cookies.delete(COOKEYS.KEY);
 		throw redirect(303, '/login');
 	}
 

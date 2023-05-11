@@ -6,6 +6,6 @@
 	export let className = '';
 </script>
 
-<a {href} class={className}>
+<a aria-label="go back to previous page" {href} class={className}>
 	<Svg src="/icons/IconArrowLeftSolid.svg" {size} color="#ffeba7" />
 </a>

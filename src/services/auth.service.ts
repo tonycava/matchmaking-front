@@ -9,6 +9,7 @@ export const register = async (
 	AxiosResponse<
 		AMLResponse<{
 			token: string;
+			authKey: string;
 		}>
 	>
 > => {
@@ -18,7 +19,10 @@ export const register = async (
 export const login = (
 	username: string,
 	password: string
-): Promise<AxiosResponse<AMLResponse<{ token: string }>>> => {
+): Promise<AxiosResponse<AMLResponse<{
+	token: string;
+	authKey: string;
+}>>> => {
 	return axios.post(`${getBaseURL()}/auth/login`, { username, password });
 };
 

@@ -6,7 +6,8 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			user?: User;
+			user?: Omit<User, 'profilePicture'>;
+			otpAuthenticated?: boolean;
 		}
 		// interface PageData {}
 		// interface Platform {}

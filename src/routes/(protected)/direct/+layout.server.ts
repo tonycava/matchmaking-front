@@ -10,6 +10,8 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
+		cookies.delete(COOKEYS.OTP_AUTHENTICATED);
+		cookies.delete(COOKEYS.KEY);
 		throw redirect(303, '/login');
 	}
 	return {

@@ -4,6 +4,7 @@ export type User = {
 	id: string;
 	username: string;
 	createdAt: Date;
+	secret: string
 	profilePicture?: string;
 	role: Role;
 };
