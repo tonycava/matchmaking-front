@@ -1,6 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { COOKEYS } from '$lib/helpers/cookie.helper';
 import UserService from '@services/user.service';
+import { HttpStatusCode } from 'axios';
 
 export enum INPUT {
 	USERNAME = 'username',
@@ -8,7 +9,7 @@ export enum INPUT {
 	MESSAGE = 'message',
 
 	PROFILE_PICTURE = 'profilePicture',
-	CODE = "code"
+	CODE = 'code'
 }
 
 export const uploadProfilePictureHelper = async ({
@@ -31,7 +32,16 @@ export const uploadProfilePictureHelper = async ({
 		jwtToken,
 		locals.user?.id ?? '',
 		logoBase64
-	).catch(() => undefined);
+	).catch((e) => {
+		if (e.response.data.code === HttpStatusCode.TooManyRequests) {
+			return { type: 'fail', status: 400, message: e.response.data.message };
+		}
+		return undefined;
+	});
+
+	if ("type" in response!) {
+		return { type: 'fail', status: 400, message: "Please wait before upload a new profile image" };
+	}
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);

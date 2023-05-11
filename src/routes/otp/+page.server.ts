@@ -22,8 +22,8 @@ export const actions: Actions = {
 
 export const load: PageServerLoad = async ({ cookies, locals, url: pageUrl }) => {
 	const key = cookies.get(COOKEYS.KEY) ?? '';
-	if (locals.otpAuthenticated) throw redirect(303, '/');
 	if (!key) throw redirect(303, '/login');
+	if (locals.otpAuthenticated) throw redirect(303, '/');
 
 	const url = await QRCode.toDataURL(key);
 	return {

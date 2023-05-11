@@ -4,8 +4,9 @@
 	import { applyAction, enhance } from '$app/forms';
 	import type { UserInformation } from '@models/User';
 	import { INPUT } from '$lib/helpers/form.helper';
+	import { page } from '$app/stores';
 
-	let form: HTMLFormElement;
+	let formElement: HTMLFormElement;
 	const handleFileUpload = (): FormActionResponse => {
 		return async ({ result }) => {
 			await applyAction(result);
@@ -14,36 +15,40 @@
 
 	export let userData: UserInformation;
 	export let needToSowEdit: boolean;
+
+	const error = $page.url.searchParams.get("error");
 </script>
 
 <img
-	class="w-40 h-40 object-cover rounded-full border-secondary border-2 p-2"
-	src={userData.profilePicture
+  class="w-40 h-40 object-cover rounded-full border-secondary border-2 p-2"
+  src={userData.profilePicture
 		? `data:image/png;base64,${userData.profilePicture}`
 		: '/default.png'}
-	alt="user icon"
+  alt="user icon"
 />
 {#if needToSowEdit}
-	<form
-		bind:this={form}
-		use:enhance={handleFileUpload}
-		action="?/uploadProfilePicture"
-		method="POST"
-		enctype="multipart/form-data"
-	>
-		<label
-			for="file-upload"
-			class="absolute top-0 -right-3 bg-secondary p-3 rounded-full cursor-pointer"
-		>
-			<Svg src="/icons/IconPenSolid.svg" size={6} />
-		</label>
-		<input
-			accept="image/jpeg,image/png"
-			on:change={() => form.submit()}
-			id="file-upload"
-			name={INPUT.PROFILE_PICTURE}
-			type="file"
-			hidden
-		/>
-	</form>
+  {#if error === "too_many_request"}
+    <span class="text-red-500 font-poppins-bold absolute whitespace-nowrap -translate-x-1/2 w-48 text-center">Please wait before upload a new profile picture</span>
+  {/if}
+  <form
+    bind:this={formElement}
+    use:enhance={handleFileUpload}
+    action="?/uploadProfilePicture"
+    method="POST"
+  >
+    <label
+      for="file-upload"
+      class="absolute top-0 -right-3 bg-secondary p-3 rounded-full cursor-pointer"
+    >
+      <Svg src="/icons/IconPenSolid.svg" size={6} />
+    </label>
+    <input
+      accept="image/jpeg,image/png"
+      on:change={() => formElement.submit()}
+      id="file-upload"
+      name={INPUT.PROFILE_PICTURE}
+      type="file"
+      hidden
+    />
+  </form>
 {/if}
