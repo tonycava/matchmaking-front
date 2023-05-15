@@ -6,7 +6,7 @@
 	export let handleSubmit: () => void;
 	export let value: string;
 	export let name: string;
-	export let textButton;
+	export let textButton: string;
 	export let action = '';
 	export let iconSrc = '/icons/IconMessageSolid.svg';
 	export let addClasses = '';
