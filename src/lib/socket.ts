@@ -16,8 +16,6 @@ export enum WEB_SOCKET_EVENT {
 const ENDPOINT = getBaseURL() ?? 'http://localhost:3000';
 
 const webSocketClient = io(ENDPOINT, {
-	path: '/socket.io',
 	transports: ['polling'],
-	secure: true
 });
 export default webSocketClient;
