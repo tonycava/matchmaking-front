@@ -41,7 +41,7 @@
 		{/if}
 	{:else}
 		<h2 class="text-center text-2xl mt-10 text-secondary">
-			You need to be in private to see your demand !
+			You need to be in private to see your friends request !
 		</h2>
 	{/if}
 </Sidebar>

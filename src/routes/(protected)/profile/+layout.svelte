@@ -67,7 +67,6 @@
 	});
 
 	socket.on(`user/${data.user.id}`, (newGame: Game) => {
-		newGame.result = newGame.result === data.user.id ? 'win' : 'loose';
 		data.user.games = [newGame, ...data.user.games];
 	});
 

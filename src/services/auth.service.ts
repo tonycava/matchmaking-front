@@ -2,31 +2,38 @@ import axios, { type AxiosResponse } from 'axios';
 import { getBaseURL } from '$lib/utils';
 import type { AMLResponse } from '@models/Chat';
 
-export const register = async (
+const register = async (
 	username: string,
 	password: string
 ): Promise<
 	AxiosResponse<
 		AMLResponse<{
 			token: string;
-			authKey: string;
+			qrCodeURL: string;
 		}>
 	>
 > => {
 	return await axios.post(`${getBaseURL()}/auth/register`, { username, password });
 };
 
-export const login = (
+const login = (
 	username: string,
 	password: string
 ): Promise<AxiosResponse<AMLResponse<{
 	token: string;
-	authKey: string;
+	qrCodeURL: string;
 }>>> => {
 	return axios.post(`${getBaseURL()}/auth/login`, { username, password });
 };
 
+const verifyOTP = (code: string, jwtToken: string): Promise<AxiosResponse<AMLResponse<{
+	token: string;
+}>>> => {
+	return axios.post(`${getBaseURL()}/auth/verify-otp`, { code }, { headers: { Authorization: jwtToken } });
+};
+
 export default {
 	register,
-	login
+	login,
+	verifyOTP
 };

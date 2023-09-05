@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import type { GameInfo } from '@models/Game';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
@@ -9,24 +9,29 @@
 	import socket from '$lib/socket';
 	import { WEB_SOCKET_EVENT } from 'matchmaking-shared';
 
+	let interval;
+
 	onMount(() => {
-		window.addEventListener('beforeunload', () => {
-			socket.emit(WEB_SOCKET_EVENT.LEAVE_WAITING, { userId: $user?.id });
-		});
+		socket.emit(WEB_SOCKET_EVENT.JOIN_WAITING, { userId: $user?.id, joinAt: new Date() });
+		interval = setInterval(() => {
+			socket.emit('alive', { userId: $user?.id, lastTimeAlive: new Date() });
+		}, 1000 * 10); // 10 seconds
 	});
 
-	socket.on(WEB_SOCKET_EVENT.PARTNER, async (data: GameInfo) => {
+	onDestroy(() => {
+		clearInterval(interval)
+	});
+
+	socket.on(WEB_SOCKET_EVENT.PARTNER, (data: GameInfo) => {
 		gameInfo.set(data);
-		await goto(`/game/${data.gameId}`);
+		goto(`/game/${data.gameId}`);
 	});
-
-	socket.emit(WEB_SOCKET_EVENT.JOIN_WAITING, { userId: $user?.id, joinAt: new Date() });
 </script>
 
 <div class="flex justify-center items-center h-screen flex-col">
 	<span class="text-secondary text-3xl font-poppins-medium text-center p-4"
-		>You are now waiting another player !</span
-	>
-	<Loading />
-	<PrimaryButton on:click={() => goto('/')}>Go back on the home page</PrimaryButton>
+  >You are now waiting another player !</span
+  >
+  <Loading />
+  <PrimaryButton on:click={() => goto('/')}>Go back on the home page</PrimaryButton>
 </div>

@@ -4,7 +4,6 @@ export type User = {
 	id: string;
 	username: string;
 	createdAt: Date;
-	secret: string
 	profilePicture?: string;
 	role: Role;
 };
@@ -29,7 +28,6 @@ export type Game = {
 	createdAt: Date;
 	loserId: string;
 	winnerId: string;
-	result: string;
 };
 
 export type UserDemand = {

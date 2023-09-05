@@ -33,25 +33,22 @@ export const uploadProfilePictureHelper = async ({
 		locals.user?.id ?? '',
 		logoBase64
 	).catch((e) => {
-		if (e.response.data.code === HttpStatusCode.TooManyRequests) {
+		if (e.response.data.code === HttpStatusCode.TooManyRequests)
 			return { type: 'fail', status: 400, message: e.response.data.message };
-		}
-		return undefined;
 	});
-
-	if ("type" in response!) {
-		return { type: 'fail', status: 400, message: "Please wait before upload a new profile image" };
-	}
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
-		cookies.delete(COOKEYS.OTP_AUTHENTICATED);
-		cookies.delete(COOKEYS.KEY);
+		cookies.delete(COOKEYS.QRCODE_URL);
 		return {
 			type: 'redirect',
 			status: 303,
 			message: '/login'
 		};
+	}
+
+	if ('type' in response) {
+		return { type: 'fail', status: 400, message: 'Please wait before upload a new profile image' };
 	}
 
 	const redirectUrl = params?.userId ? `/profile/${params.userId}` : '/profile';

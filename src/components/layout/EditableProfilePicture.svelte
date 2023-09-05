@@ -6,17 +6,14 @@
 	import { INPUT } from '$lib/helpers/form.helper';
 	import { page } from '$app/stores';
 
-	let formElement: HTMLFormElement;
+	let buttonElement: HTMLButtonElement;
 	const handleFileUpload = (): FormActionResponse => {
 		return async ({ result }) => {
 			await applyAction(result);
 		};
 	};
-
 	export let userData: UserInformation;
 	export let needToSowEdit: boolean;
-
-	const error = $page.url.searchParams.get("error");
 </script>
 
 <img
@@ -27,13 +24,13 @@
   alt="user icon"
 />
 {#if needToSowEdit}
-  {#if error === "too_many_request"}
-    <span class="text-red-500 font-poppins-bold absolute whitespace-nowrap -translate-x-1/2 w-48 text-center">Please wait before upload a new profile picture</span>
+  {#if $page.form?.internalError}
+    <span class="text-red-500 font-poppins-bold absolute whitespace-nowrap -translate-x-1/2 w-48 text-center">{$page.form?.internalError}</span>
   {/if}
   <form
-    bind:this={formElement}
     use:enhance={handleFileUpload}
     action="?/uploadProfilePicture"
+    enctype="multipart/form-data"
     method="POST"
   >
     <label
@@ -44,11 +41,12 @@
     </label>
     <input
       accept="image/jpeg,image/png"
-      on:change={() => formElement.submit()}
       id="file-upload"
+      on:input={() => buttonElement.click()}
       name={INPUT.PROFILE_PICTURE}
       type="file"
       hidden
     />
+    <button bind:this={buttonElement} type="submit" hidden></button>
   </form>
 {/if}

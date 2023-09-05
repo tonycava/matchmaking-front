@@ -19,8 +19,7 @@ const login: Action = async ({ request, cookies }) => {
 	}
 
 	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token, defaultCookiesOptions);
-	cookies.set(COOKEYS.KEY, response.data.data.authKey, defaultCookiesOptions);
-	cookies.set(COOKEYS.OTP_AUTHENTICATED, '0', defaultCookiesOptions);
+	cookies.set(COOKEYS.QRCODE_URL, response.data.data.qrCodeURL, defaultCookiesOptions);
 
 	throw redirect(303, `/otp`);
 };

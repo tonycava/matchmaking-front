@@ -24,5 +24,5 @@
 	style="height: {0.25 * size}rem; width: {0.25 * size}rem;"
 	class="[&>svg]:h-full [&>svg]:w-full {className}"
 >
-	{@html svg}
+	<p class="text-center">{@html svg ?? "..."}</p>
 </div>

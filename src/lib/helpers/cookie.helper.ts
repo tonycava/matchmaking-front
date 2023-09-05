@@ -2,8 +2,7 @@ import type { CookieSerializeOptions } from 'cookie';
 
 export enum COOKEYS {
 	JWT_TOKEN = 'jwt_token',
-	KEY = "key",
-	OTP_AUTHENTICATED = 'otp_auth',
+	QRCODE_URL = "qrcode_url",
 }
 
 export const defaultCookiesOptions: CookieSerializeOptions = {
