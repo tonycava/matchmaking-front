@@ -1,7 +1,6 @@
 import axios, { type AxiosResponse } from 'axios';
 import { getBaseURL } from '$lib/utils';
 import type { AMLResponse } from '@models/Chat';
-import { COOKEYS } from '$lib/helpers/cookie.helper';
 
 const register = async (
 	username: string,
