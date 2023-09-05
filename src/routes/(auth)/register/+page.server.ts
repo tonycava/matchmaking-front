@@ -21,8 +21,8 @@ const register: Action = async ({ request, cookies }) => {
 	console.log(response.data.data.qrCodeURL)
 	console.log(response.data.data.token)
 
-	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token, defaultCookiesOptions);
-	cookies.set(COOKEYS.QRCODE_URL, response.data.data.qrCodeURL, defaultCookiesOptions);
+	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token);
+	cookies.set(COOKEYS.QRCODE_URL, response.data.data.qrCodeURL);
 
 	throw redirect(303, `/otp`);
 };
