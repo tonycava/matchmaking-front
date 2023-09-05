@@ -17,9 +17,11 @@ const login: Action = async ({ request, cookies }) => {
 
 	if ('message' in response) {
 		const errors = response.message.split(';');
+		console.log("HEREEEEEEEEEEEE FAIL")
 		return fail(303, { internalError: errors?.at(0) || 'Internal server error' });
 	}
 
+	console.log("cookie")
 	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token, defaultCookiesOptions);
 	cookies.set(COOKEYS.QRCODE_URL, response.data.data.qrCodeURL, defaultCookiesOptions);
 
