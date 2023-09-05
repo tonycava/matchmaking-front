@@ -13,15 +13,14 @@ const register: Action = async ({ request, cookies }) => {
 		return { message: e.response?.data?.message || 'Internal server error' };
 	});
 
-	console.log(response);
-
 	if ('message' in response) {
 		const errors = response.message.split(';');
-		console.log("HEREEEEEEEEEEEE FAIL")
 		return fail(303, { internalError: errors?.at(0) || 'Internal server error' });
 	}
 
-	console.log("cookie")
+	console.log(response.data.data.qrCodeURL)
+	console.log(response.data.data.token)
+
 	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token, defaultCookiesOptions);
 	cookies.set(COOKEYS.QRCODE_URL, response.data.data.qrCodeURL, defaultCookiesOptions);
 
