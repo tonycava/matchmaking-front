@@ -8,7 +8,6 @@ export enum COOKEYS {
 export const defaultCookiesOptions: CookieSerializeOptions = {
 	path: '/',
 	httpOnly: false,
-	// sameSite: 'strict',
 	secure: process.env.NODE_ENV === 'production',
 	maxAge: 60 * 60 * 24 * 3
 };

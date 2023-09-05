@@ -13,6 +13,8 @@ const register: Action = async ({ request, cookies }) => {
 		return { message: e.response?.data?.message || 'Internal server error' };
 	});
 
+	console.log(response);
+
 	if ('message' in response) {
 		const errors = response.message.split(';');
 		return fail(303, { internalError: errors?.at(0) || 'Internal server error' });
