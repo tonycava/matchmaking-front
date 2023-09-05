@@ -39,7 +39,6 @@ export const uploadProfilePictureHelper = async ({
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
-		cookies.delete(COOKEYS.QRCODE_URL);
 		return {
 			type: 'redirect',
 			status: 303,

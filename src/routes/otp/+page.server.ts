@@ -3,8 +3,6 @@ import { COOKEYS, defaultCookiesOptions } from '$lib/helpers/cookie.helper';
 import { type Actions, fail, redirect } from '@sveltejs/kit';
 import { INPUT } from '$lib/helpers/form.helper';
 import AuthService from '@services/auth.service';
-import axios from 'axios';
-import { getBaseURL } from '$lib/utils';
 
 export const actions: Actions = {
 	default: async ({ request, cookies }) => {
@@ -22,7 +20,6 @@ export const actions: Actions = {
 			});
 		}
 
-		cookies.delete(COOKEYS.QRCODE_URL);
 		cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token, defaultCookiesOptions);
 		throw redirect(303, '/');
 	}
@@ -30,15 +27,11 @@ export const actions: Actions = {
 
 
 export const load: PageServerLoad = async ({ cookies, locals }) => {
-	console.log(cookies.get(COOKEYS.JWT_TOKEN), "tokennnnnn")
+	const jwtToken = cookies.get(COOKEYS.JWT_TOKEN) as string;
+	const response = await AuthService.generateQRCode(jwtToken)
+		.catch(() => undefined);
 
-	const response = await axios.get(`${getBaseURL()}/auth/generate-qr-code`, {
-		headers: { Authorization: cookies.get(COOKEYS.JWT_TOKEN) }
-	}).catch(() => undefined);
-
-	console.log(response)
-
-	if (!response) {
+	if (!response || response.data.code === 401) {
 		cookies.delete(COOKEYS.JWT_TOKEN);
 		throw redirect(303, '/login');
 	}

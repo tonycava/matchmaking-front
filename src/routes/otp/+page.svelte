@@ -6,15 +6,14 @@
 	import { applyAction } from '$app/forms';
 	import PrimaryButton from '@components/button/PrimaryButton.svelte';
 	import Cookies from 'js-cookie';
-	import { COOKEYS } from '$lib/helpers/cookie.helper';
 	import { goto } from '$app/navigation';
+	import { COOKEYS } from '$lib/helpers/cookie.helper';
 
 	let isLoading = false;
 	export let form: FormResponse;
 
 	const onCancel = () => {
 		Cookies.remove(COOKEYS.JWT_TOKEN);
-		Cookies.remove(COOKEYS.QRCODE_URL);
 		goto('/login');
 	};
 

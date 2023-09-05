@@ -1,6 +1,7 @@
 import axios, { type AxiosResponse } from 'axios';
 import { getBaseURL } from '$lib/utils';
 import type { AMLResponse } from '@models/Chat';
+import { COOKEYS } from '$lib/helpers/cookie.helper';
 
 const register = async (
 	username: string,
@@ -32,8 +33,20 @@ const verifyOTP = (code: string, jwtToken: string): Promise<AxiosResponse<AMLRes
 	return axios.post(`${getBaseURL()}/auth/verify-otp`, { code }, { headers: { Authorization: jwtToken } });
 };
 
+const generateQRCode = (
+	jwtToken: string
+): Promise<AxiosResponse<AMLResponse<{
+	qrCodeURL: string;
+}>>> => {
+	return axios.get(`${getBaseURL()}/auth/generate-qr-code`, {
+		headers: { Authorization: jwtToken }
+	})
+};
+
+
 export default {
 	register,
 	login,
-	verifyOTP
+	verifyOTP,
+	generateQRCode
 };
