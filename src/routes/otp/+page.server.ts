@@ -30,9 +30,13 @@ export const actions: Actions = {
 
 
 export const load: PageServerLoad = async ({ cookies, locals }) => {
+	console.log(cookies.get(COOKEYS.JWT_TOKEN), "tokennnnnn")
+
 	const response = await axios.get(`${getBaseURL()}/auth/generator/qr-code`, {
 		headers: { Authorization: cookies.get(COOKEYS.JWT_TOKEN) }
-	}).catch((e) => undefined);
+	}).catch(() => undefined);
+
+	console.log(response)
 
 	if (!response) {
 		cookies.delete(COOKEYS.JWT_TOKEN);

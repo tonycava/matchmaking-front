@@ -19,7 +19,7 @@ const register: Action = async ({ request, cookies }) => {
 	}
 	console.log(response.data.data.token)
 
-	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token);
+	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token, defaultCookiesOptions);
 
 	console.log("finishhhhhhh reg")
 
