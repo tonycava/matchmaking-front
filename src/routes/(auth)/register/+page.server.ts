@@ -17,12 +17,11 @@ const register: Action = async ({ request, cookies }) => {
 		const errors = response.message.split(';');
 		return fail(303, { internalError: errors?.at(0) || 'Internal server error' });
 	}
-
-	console.log(response.data.data.qrCodeURL)
 	console.log(response.data.data.token)
 
 	cookies.set(COOKEYS.JWT_TOKEN, response.data.data.token);
-	cookies.set(COOKEYS.QRCODE_URL, response.data.data.qrCodeURL);
+
+	console.log("finishhhhhhh reg")
 
 	throw redirect(303, `/otp`);
 };
